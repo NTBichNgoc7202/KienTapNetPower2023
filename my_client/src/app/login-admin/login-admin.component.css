@@ -1,33 +1,4 @@
-/* .box {
-    border: 0.5px solid rgba(131, 121, 121, 0.5);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-}
 
-.container {
-    font-size: 14px;
-}
-
-#form-container-login-admin {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-.lg {
-    width: 35%;
-}
-
-.login {
-    text-decoration: none;
-}
-
-i {
-    font-size: 14px;
-} */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200%3B300%3B400%3B500%3B600%3B700&display=swap');
 *{
