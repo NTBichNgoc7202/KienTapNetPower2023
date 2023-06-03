@@ -1,0 +1,65 @@
+
+<!-- Related Section End -->
+<!-- Shop Details Section Begin -->
+
+ <div class="container">
+  <div class="row">
+    <div class="img-zoom-container col-lg-6 col-sm-6">
+      <img class="product__details__pic" src="{{ productInfo.image }}" alt="" />
+    </div>
+    <div class="product__details__content col-lg-6 col-sm-6">
+      <div class="d-flex justify-content-center">
+        <div class="product__details__text">
+          <h4>{{ productInfo.name }}</h4>
+          <div class="rating">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="product__details__last__option">
+            <!-- <h5><span>KIỂM TRA SẢN PHẨM</span></h5> -->
+            <ul>
+              <li><span>Mã sản phẩm:</span> {{ productInfo._id }}</li>
+              <li><span>Danh mục:</span> {{ productInfo.categoryId }}</li>
+            </ul>
+          </div>
+          <hr>
+          <h3>Giá: {{ productInfo.price | currency : "VND" : "symbol-narrow" : "6.0-3" }} </h3>
+          <hr>
+          <!-- số lượng -->
+          <div class="quantity ">
+            <div class="pro-qty ">
+              <input class="input-qty" type="text" [(ngModel)]="productInfo.quantity" />
+            </div>
+            <br>
+            <tr>
+              <td>
+                <div class="product__details__cart__option">
+                  <a class="primary-btn" (click)="addtocart(productInfo)"
+                    >Thêm vào giỏ hàng</a>
+                </div>
+              </td>
+              <td>
+                <div class="product__details__btns__option">
+                  <a (click)="addtofavorite(productInfo)"><i class="fa-solid fa-heart"></i> Thêm vào yêu thích</a>
+                </div>
+              </td>
+            </tr>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <h4>MÔ TẢ SẢN PHẨM</h4>
+    <hr>
+    <p>
+      {{ productInfo.description}}
+    </p>
+  </div>
+</div>
+

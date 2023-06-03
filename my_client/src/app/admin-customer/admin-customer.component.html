@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active">
+        <b> Danh sách người dùng </b>
+      </li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <!-- <div class="add-product"><button>Thêm người dùng</button></div> -->
+
+  <div class="row">
+    <table class="table table-hover table-bordered" id="sampleTable">
+      <thead>
+        <tr>
+          <th>Mã khách hàng</th>
+          <th>Tên người dùng</th>
+          <th>Số điện thoại</th>
+          <th>Email</th>
+          <th>Địa chỉ</th>
+          <th>Chức năng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of user">
+          <td>{{ c.unique_id }}</td>
+          <td>{{ c.username }}</td>
+          <td>{{ c.phone }} </td>
+          <td>{{ c.useremail }}</td>
+          <td>{{ c.address }}</td>
+          <td>
+            <button
+              class="btn btn-sm trash me-3 delete-button"
+              type="button"
+              title="Xóa"
+              (click)="delete(c._id)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button
+              class="btn btn-sm edit"
+              type="button"
+              title="Sửa"
+              id="show-emp"
+              (click)="onEdit(c._id)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active">
+        <b> Danh sách sản phẩm </b>
+      </li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <div class="add-product">
+    <button (click)="onAddNew()">Thêm sản phẩm</button>
+  </div>
+
+  <div class="row">
+    <table class="table table-hover table-bordered" id="sampleTable">
+      <thead>
+        <tr>
+          <!-- <th width="10"><input type="checkbox" id="all"></th> -->
+          <th>Mã sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Ảnh</th>
+          <th>Giá tiền</th>
+          <th>Danh mục</th>
+          <th>Chức năng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of productList">
+          <!-- <td width="10"><input type="checkbox" name="check1" value="1"></td> -->
+          <td id="productid">{{ p._id }}</td>
+          <td>{{ p.name }}</td>
+          <td><img src="{{ p.image }}" alt="" width="100px;" /></td>
+          <td>{{ p.price| currency : "VND" : "symbol-narrow" : "6.0-3" }} </td>
+          <td>{{ changeIdToName(p.categoryId) }}</td>
+          <td>
+            <button
+              class="btn btn-sm trash me-3 delete-button"
+              type="button"
+              title="Xóa"
+              (click)="delete(p._id)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+            <button
+              class="btn btn-sm edit"
+              type="button"
+              title="Sửa"
+              id="show-emp"
+              (click)="onEdit(p._id)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

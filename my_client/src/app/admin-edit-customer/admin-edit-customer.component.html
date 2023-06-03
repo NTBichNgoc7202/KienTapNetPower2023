@@ -1,0 +1,79 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="tile">
+      <div class="tile-body">
+        <form
+          action=""
+          #productForm="ngForm"
+          (ngSubmit)="editData(productForm)"
+        >
+          <input type="hidden" name="id" [(ngModel)]="user.unique_id" />
+          <div class="mb-3">
+            <label for="id">Mã:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="id"
+              name="id"
+              [(ngModel)]="user.unique_id"
+              [readOnly]="true"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="name">Tên người dùng :</label><br />
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              placeholder="Nhập tên tài khoản người dùng"
+              [(ngModel)]="user.username"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="price">Số điện thoại:</label>
+            <input
+              type="number"
+              class="form-control"
+              id="phone"
+              name="phone"
+              [(ngModel)]="user.phone"
+            />
+          </div>
+
+               <div class="mb-3">
+            <label for="category">Email:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="Nhập email"
+              [(ngModel)]="user.useremail"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="category">Địa chỉ:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="address"
+              name="address"
+              placeholder="Nhập address"
+              [(ngModel)]="user.address"
+            />
+          </div>
+
+          <div class="mb-3 text-center">
+            <button type="submit" class="btn me-3">Lưu</button>
+            <button (click)="onBack()">Quay lại</button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+

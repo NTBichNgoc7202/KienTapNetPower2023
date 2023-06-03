@@ -1,0 +1,176 @@
+<!-- Shop Section Begin -->
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="shop__sidebar">
+        <div class="shop__sidebar__search">
+          <input
+            (click)="search()"
+            id="menu--search"
+            type="text"
+            [(ngModel)]="searchText"
+            placeholder="&numsp; Search..."
+            autocomplete="on"
+            #toggleButton
+          />
+          <div class="search-content" [class.d-none]="search_content" #menu>
+            <table class="table">
+              <tbody>
+                <tr
+                  *ngFor="let p of productList | filter : searchText"
+                  (click)="onSelect(p._id)"
+                >
+                  <td>{{ p.name }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="shop__sidebar__accordion">
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-heading">
+                <a data-toggle="collapse" data-target="#collapseOne"
+                  >DANH MỤC SẢN PHẨM</a
+                >
+              </div>
+              <div
+                id="collapseOne"
+                class="collapse show"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div class="shop__sidebar__categories">
+                    <ul class="nice-scroll">
+                      <li *ngFor="let c of categories">
+                        <a
+                          (click)="getProductByCategory(c.categoryId)"
+                          [innerText]="c.name"
+                        ></a>
+                      </li>
+                      <li><a (click)="getProducts();this.paginator.firstPage()" [innerText]="'Tất cả'"></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-heading">
+                <a data-toggle="collapse" data-target="#collapseSix">Tags</a>
+              </div>
+              <div
+                id="collapseSix"
+                class="collapse show"
+                data-parent="#accordionExample"
+              >
+                <div class="card-body">
+                  <div class="shop__sidebar__tags">
+                    <a (click)="sortByTags('bestseller')">Best seller</a>
+                  </div>
+                  <div class="shop__sidebar__tags">
+                    <a (click)="sortByTags('new')">New Arrival</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="shop__product__option">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="shop__product__option__left">
+              <button class="btn btn-primary" (click)="showAll()">
+                Hiển thị tất cả sản phẩm
+              </button>
+              <span
+                class="ms-3 btn btn-success"
+                [innerText]="tag"
+                *ngIf="tag != ''"
+              ></span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="shop__product__option__right">
+              <p>Tìm kiếm theo giá: &nbsp;</p>
+              <select [(ngModel)]="sortByPrice" (change)="onEditClick($event)">
+                <option value="1">Thấp đến cao</option>
+                <option value="-1">Cao đến thấp</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-3 col-lg-4 col-md-3 col-sm-3 col-md-4 col-sm-3"
+          *ngFor="let p of productList; index as i"
+        >
+          <div class="product__item" *ngIf="i < limitToShow && i >= startToShow">
+            <div class="product__item__pic">
+              <div (click)="onSelect(p._id)">
+                <img class="product__item__pic set-bg" src="{{ p.image }}" />
+                <span class="label">New</span>
+              </div>
+              <ul class="product__hover">
+                <li>
+                  <a (click)="addtofavorite(p)"
+                    ><img src="assets/images/icon/heart.png" alt="" />
+                    <span>Like</span></a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="product__item__text">
+              <h6>{{ p.name }}</h6>
+              <a
+                href="javascript:void(0);"
+                class="add-cart"
+                (click)="addtocart(p)"
+                >+ Add To Cart</a
+              >
+              <div class="rating">
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              </div>
+              <h5>
+                {{ p.price | currency : "VND" : "symbol-narrow" : "6.0-3" }}
+              </h5>
+            </div>
+          </div>
+        </div>
+        <div class="mat-paginator-custome">
+          <mat-paginator
+            #paginator
+            [length]="length"
+            [pageIndex]="pageIndex"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="[12, 24, 36]"
+            (page)="changePaginator($event)"
+            showFirstLastButtons
+          >
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Shop Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="search-close-switch">+</div>
+    <form class="search-model-form">
+      <input type="text" id="search-input" placeholder="Search here....." />
+    </form>
+  </div>
+</div>
+<!-- Search End -->

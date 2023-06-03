@@ -1,0 +1,240 @@
+<link rel="stylesheet" href="regis.component.css" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<body>
+  <div class="container-signup-form">
+    <div class="forms">
+      <form
+        [formGroup]="regForm"
+        #userForm="ngForm"
+        (ngSubmit)="submitData(userForm.value)"
+      >
+        <div class="form-content">
+          <div class="signup-form">
+            <div class="title">Đăng ký</div>
+            <div class="rowcontainer">
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-user"></i>
+                  <input
+                    type="text"
+                    placeholder="Họ và tên"
+                    required
+                    id="username"
+                    class="form-control"
+                    formControlName="username"
+                    name="username"
+                    [(ngModel)]="user['username']"
+                    [class.is-invalid]="username.invalid && username.touched"
+                    [required]="true"
+                  />
+                </div>
+                <div *ngIf="username.invalid && username.touched" class="my-2">
+                  <small
+                    *ngIf="username.errors?.['required']"
+                    class="text-danger"
+                    >Họ và tên không được để trống!</small
+                  >
+                  <small
+                    *ngIf="username.errors?.['minlength']"
+                    class="text-danger"
+                    >Họ và tên bắt buộc trên 2 ký tự!</small
+                  >
+                  <small
+                    *ngIf="username.errors?.['nameNotMatch']"
+                    class="text-danger"
+                    >Họ và tên không được chứa ký tự đặc biệt</small
+                  >
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-envelope"></i>
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    required
+                    id="useremail-regis"
+                    class="form-control"
+                    formControlName="useremail"
+                    name="useremail"
+                    [(ngModel)]="user['useremail']"
+                    [class.is-invalid]="useremail.invalid && useremail.touched"
+                    [required]="true"
+                  />
+                </div>
+                <div
+                  *ngIf="useremail.invalid && useremail.touched"
+                  class="my-2"
+                >
+                  <small
+                    *ngIf="useremail.errors?.['required']"
+                    class="text-danger"
+                    >Email không được để trống!</small
+                  >
+                  <small *ngIf="useremail.errors?.['email']" class="text-danger"
+                    >Email không hợp lệ!</small
+                  >
+                </div>
+                <div class="input-box">
+                  <i
+                    class="fas fa-solid fa-house fa-xl"
+                    style="color: #000000"
+                  ></i>
+                  <input
+                    type="text"
+                    placeholder="Địa chỉ"
+                    id="address"
+                    class="form-control"
+                    formControlName="address"
+                    name="address"
+                    [(ngModel)]="user['address']"
+                    [class.is-invalid]="address.invalid && address.touched"
+                    [required]="true"
+                  />
+                </div>
+                <div *ngIf="address.invalid && address.touched" class="my-2">
+                  <small
+                    *ngIf="address.errors?.['required']"
+                    class="text-danger"
+                    >Địa chỉ không được để trống!</small
+                  >
+                  <small
+                    *ngIf="address.errors?.['minlength']"
+                    class="text-danger"
+                    >Địa chỉ phải trên 10 ký tự!</small
+                  >
+                </div>
+              </div>
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i class="fas fa-solid fa-phone fa-flip-horizontal"></i>
+                  <input
+                    type="text"
+                    id="phone"
+                    class="form-control"
+                    formControlName="phone"
+                    name="phone"
+                    [class.is-invalid]="phone.invalid && phone.touched"
+                    [(ngModel)]="user['phone']"
+                    [required]="true"
+                    placeholder="Số điện thoại"
+                    required
+                  />
+                </div>
+                <div *ngIf="phone.invalid && phone.touched" class="my-2">
+                  <small *ngIf="phone.errors?.['required']" class="text-danger"
+                    >Số điện thoại không được để trống!</small
+                  >
+                  <small *ngIf="phone.errors?.['minlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
+                  <small *ngIf="phone.errors?.['maxlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
+                  <small *ngIf="phone.errors?.['pattern']" class="text-danger">
+                    Số điện thoại không hợp lệ!</small
+                  >
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="pass"
+                    id="password"
+                    class="form-control"
+                    formControlName="pass"
+                    [class.is-invalid]="pass.invalid && pass.touched"
+                    [(ngModel)]="user['pass']"
+                    [required]="true"
+                    placeholder="Mật khẩu"
+                    required
+                  />
+                </div>
+                <div *ngIf="pass.invalid && pass.touched" class="my-2">
+                  <small *ngIf="pass.errors?.['required']" class="text-danger"
+                    >Mật khẩu không được để trống!
+                  </small>
+                  <small *ngIf="pass.errors?.['minlength']" class="text-danger"
+                    >Mật khẩu bắt buộc từ 8 ký tự trở lên!</small
+                  >
+                </div>
+
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="confirmPass"
+                    id="confirmpassword"
+                    class="form-control"
+                    formControlName="confirmPass"
+                    [class.is-invalid]="
+                      confirmPass.invalid && confirmPass.touched
+                    "
+                    [required]="true"
+                    placeholder="Nhập lại mật khẩu"
+                    required
+                  />
+                </div>
+                <div
+                  *ngIf="confirmPass.invalid && confirmPass.touched"
+                  class="my-2"
+                >
+                  <small
+                    *ngIf="confirmPass.errors?.['required']"
+                    class="text-danger"
+                    >Nhập lại mật khẩu không được để trống!
+                  </small>
+                </div>
+                <div *ngIf="regForm.errors?.['misMatch']" class="my-2">
+                  <small
+                    class="text-danger"
+                    *ngIf="regForm.errors?.['misMatch']"
+                    >Mật khẩu không trùng khớp!</small
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="button input-box">
+                <input
+                  type="submit"
+                  class="btn btn-dark btn-sm my-3 lg lg1"
+                  [disabled]="!regForm.valid"
+                  value="Đăng ký"
+                />
+              </div>
+              <div
+                routerLink="/login"
+                routerLinkActive="active"
+                class="text sign-up-text"
+              >
+                Bạn đã có tài khoản? <label for="flip">Đăng nhập</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="row justify-content-between">
+        <div class="col-5">
+          <button
+            class="btn btn-dark btn-sm mb-3 signup-button"
+            (click)="onFeatureInDevelopment()"
+          >
+            Facebook
+          </button>
+        </div>
+        <div class="col-5">
+          <button
+            class="btn btn-dark btn-sm mb-3 lg signup-button"
+            (click)="onFeatureInDevelopment()"
+          >
+            Google
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

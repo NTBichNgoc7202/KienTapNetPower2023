@@ -1,0 +1,27 @@
+.box {
+    background-color: rgba(0, 0, 0, 0.75)!important;
+}
+
+#form-container {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lg {
+    width: 35%;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.login {
+    text-decoration: none;
+}
+
+@media(max-width: 992px) {
+    .lg {
+        width: 50%;
+    }
+}

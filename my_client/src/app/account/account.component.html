@@ -1,0 +1,317 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<link rel="stylesheet" type="text/css" href="account.component.css" />
+
+<div class="container-account">
+  <section class="py-5 my-5">
+    <div class="container">
+      <h1 class="mb-5">Account Settings</h1>
+      <div
+        class="form-account bg-white shadow rounded-lg d-block d-lg-flex d-md-flex d-sm-block p-2"
+      >
+        <div class="profile-tab-nav border-right">
+          <div class="p-1">
+            <div class="img-circle text-center mb-3">
+              <img src="../../assets/images/icon/accounticon.jpg" class="shadow" />
+            </div>
+            <h4 class="text-center">{{ userInfo.username }}</h4>
+          </div>
+          <div
+            class="nav nav-pills"
+            id="v-pills-tab"
+            role="tablist"
+            aria-orientation="vertical"
+          >
+            <a
+              (click)="onProfileClick()"
+              class="bold-hover-nav nav-link active col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
+              id="account-tab"
+              data-toggle="pill"
+              role="tab"
+              aria-controls="account"
+              aria-selected="true"
+            >
+              <i
+                class="fa-solid fa-user text-center mr-1"
+                style="color: #000000"
+              ></i>
+              <span class="nav-text">User Profile</span>
+            </a>
+            <a
+              (click)="onGetOrderClick()"
+              class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
+              id="history-tab"
+              data-toggle="pill"
+              role="tab"
+              aria-controls="history"
+              aria-selected="false"
+            >
+              <i class="fa-solid fa-cart-shopping" style="color: #000000"></i>
+              <span class="nav-text">Order History</span>
+            </a>
+            <a
+              (click)="onLogoutClick()"
+              class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12"
+              id="logout-tab"
+              data-toggle="pill"
+              role="tab"
+              aria-controls="logout"
+              aria-selected="false"
+            >
+              <i
+                class="fas fa-solid fa-right-from-bracket fa-flip-horizontal"
+                style="color: #000000"
+              ></i>
+              <span class="nav-text">Đăng xuất</span>
+            </a>
+          </div>
+        </div>
+        <div
+          class="tab-content p-4 p-md-12"
+          id="v-pills-tabContent"
+          *ngIf="isOnProfile"
+        >
+          <div
+            id="account111"
+            class="tab-pane fade show active"
+            role="tabpanel"
+            aria-labelledby="account-tab"
+          >
+            <h3 class="mb-4">Thông tin tài khoản</h3>
+            <div class="row" ng-repeat="u in users">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Họ và tên</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ userInfo.username }}"
+                  />
+                </div>
+              </div>
+              <!-- <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Ngày sinh</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Giới tính</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+              </div> -->
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ userInfo.useremail }}"
+                  />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ userInfo.phone }}"
+                  />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ userInfo.address }}"
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="openForm()">
+                Thay đổi
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="tab-content p-4 p-md-12"
+          id="v-pills-tabContent"
+          *ngIf="isOnGetOrder"
+        >
+          <div
+            class="table-striped table-responsive-sm table-responsive-md table-responsive-lq table-responsive-xl"
+          >
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col" class="align-middle">STT</th>
+                  <th class="text-center" scope="col" class="align-middle">
+                    Tổng tiền
+                  </th>
+                  <th class="text-center" scope="col" class="align-middle">
+                    Các sản phẩm
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  class="aligh-middle"
+                  *ngFor="let order of orders; let i = index"
+                >
+                  <th class="align-middle" scope="row">{{ i + 1 }}</th>
+                  <td class="align-middle">{{ order.totalPrice }}</td>
+                  <td class="align-middle">
+                    <div *ngFor="let item of order.products">
+                      <div class="row">
+                        <div
+                          class="col-3 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center"
+                        >
+                          <img class="img-size" [src]="item.image" alt="" />
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-9 col-xl-9">
+                          <strong>{{ item.name }}</strong>
+                          <div>Price: {{ item.price }}</div>
+                          <div>Quantity: {{ item.quantity }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- <link rel="stylesheet" type="text/css"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="account.component.css" />
+
+<div class="container-account">
+  <section class="py-5 my-5">
+    <div class="container">
+      <h1 class="mb-5">Account Settings</h1>
+      <div class="bg-white shadow rounded-lg d-block d-lg-flex d-md-flex d-sm-block">
+        <div class="profile-tab-nav border-right">
+          <div class="p-4">
+            <div class="img-circle text-center mb-3">
+              <img [src]="userInfo.image" alt="Image" class="shadow" />
+            </div>
+            <h4 class="text-center">{{ userInfo.username }}</h4>
+          </div>
+          <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a (click)="onProfileClick()" class="nav-link active col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
+              id="account-tab" data-toggle="pill" role="tab" aria-controls="account" aria-selected="true">
+              <i class="fa-solid fa-user text-center mr-1" style="color: #000000"></i>
+              <span class="nav-text">User Profile</span>
+            </a>
+            <a (click)="onGetOrderClick()" class="nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
+              id="history-tab" data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
+              <i class="fa-solid fa-cart-shopping" style="color: #000000"></i>
+              <span class="nav-text">Order History</span>
+            </a>
+            <a (click)="onLogoutClick()" class="nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
+            id="logout-tab" data-toggle="pill" role="tab" aria-controls="logout" aria-selected="false">
+            <i class="fa-solid fa-cart-shopping" style="color: #000000"></i>
+            <span class="nav-text">Đăng xuất</span>
+          </a>
+          </div>
+        </div>
+        <div class="tab-content p-4 p-md-12" id="v-pills-tabContent" *ngIf="isOnProfile">
+          <div id="account111" class="tab-pane fade show active" role="tabpanel" aria-labelledby="account-tab">
+            <h3 class="mb-4">Thông tin tài khoản</h3>
+            <div class="row" ng-repeat="u in users">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Họ và tên</label>
+                  <input type="text" class="form-control" value="{{ userInfo.username }}" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Ngày sinh</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Giới tính</label>
+                  <input type="text" class="form-control" value="" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="text" class="form-control" value="{{ userInfo.useremail }}" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Số điện thoại</label>
+                  <input type="text" class="form-control" value="{{ userInfo.phone }}" />
+                </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12">
+                <div class="form-group">
+                  <label>Địa chỉ</label>
+                  <input type="text" class="form-control" value="{{ userInfo.address }}" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="openForm()">
+                Thay đổi
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content p-4 p-md-12" id="v-pills-tabContent" *ngIf="isOnGetOrder">
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tổng tiền</th>
+                <th>Các sản phẩm</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ order.totalPrice }}</td>
+                <td>
+                  <div *ngFor="let item of order.products">
+                    <div>
+                      <img [src]="item.image" alt="" />
+                    </div>
+                    <div>
+                      <p>{{ item.name }}</p>
+                      <p>{{ item.price }}</p>
+                      <p>{{ item.quantity }}</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</div> -->

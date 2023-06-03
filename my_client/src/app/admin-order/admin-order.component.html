@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <div class="app-title">
+    <ul class="app-breadcrumb breadcrumb side">
+      <li class="breadcrumb-item active">
+        <b> Danh sách đơn hàng</b>
+      </li>
+    </ul>
+    <div id="clock"></div>
+  </div>
+  <!-- <div class="add-product"><button>Thêm đơn đặt hàng</button></div> -->
+
+  <div class="row">
+    <table class="table table-hover table-bordered" id="sampleTable">
+      <thead>
+        <tr>
+          <th>Mã đơn hàng</th>
+          <th>Tên người dùng</th>
+          <th>Số điện thoại</th>
+          <th>Địa chỉ</th>
+          <th>Tổng tiền</th>
+          <th>Phương thức thanh toán</th>
+          <th>Mã người dùng</th>
+          <th>Các sản phẩm</th>
+          <th>Ngày tạo</th>
+          <th>Xóa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders">
+          <td>{{ o._id }}</td>
+          <td>{{ o.username }}</td>
+          <td>{{ o.phone }} </td>
+          <td>{{ o.address }}</td>
+          <td>{{ o.totalPrice | currency : "VND" : "symbol-narrow" : "6.0-3"}}</td>
+          <td>{{ o.payment }}</td>
+          <td>{{ o.unique_id }}</td>
+          <td>
+            <div *ngFor="let p of o.products">
+              <p [innerText]="p.name"></p>
+            </div>
+          </td>
+          <td>{{ o.createdAt | date :'short' }}</td>
+          <td>
+            <button
+              class="btn btn-sm trash me-3 delete-button"
+              type="button"
+              title="Xóa"
+              (click)="delete(o._id)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

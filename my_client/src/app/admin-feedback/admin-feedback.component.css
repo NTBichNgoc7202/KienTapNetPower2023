@@ -1,0 +1,67 @@
+
+.app-title {
+  display: block;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #FFF;
+  border-radius: .375rem;
+  padding: 10px 30px;
+  -webkit-box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 10%);
+  border-left: 6px solid #FFD43B;
+  margin-bottom: 20px;
+}
+
+
+.app-breadcrumb {
+  margin-bottom: 0;
+  text-align: right;
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: capitalize;
+  padding: 0;
+  text-align: left;
+  padding: 0;
+  background-color: transparent;
+}
+.add-product{
+  text-align: center;
+  margin-bottom: 10px;
+}
+.add-product >button{
+ padding: 15px 20px;
+ border-radius: 5px;
+}
+
+.add-product >button:hover{
+  color: white;
+  background-color: black;
+ }
+
+ .delete-button > button{
+  padding: 3px;
+  background-color: red;
+ }
+
+
+
+
+
+ @media(max-width: 480px) {
+  .container{
+    max-width: 100%;
+  }
+  .row{
+    overflow-x: scroll;
+  }
+}

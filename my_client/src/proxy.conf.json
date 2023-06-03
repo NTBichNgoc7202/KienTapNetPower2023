@@ -1,0 +1,85 @@
+[
+  {
+    "context": ["/userLogin"],
+    "target": "http://127.0.0.1:3000/users/login",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/userLogin": "" }
+  },
+  {
+    "context": ["/loginCookie"],
+    "target": "http://127.0.0.1:3000/users/loginCookie",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "Connection": "keep-alive"
+    },
+    "pathRewrite": { "^/loginCookie": "" }
+  },
+  {
+    "context": ["/login-admin"],
+    "target": "http://127.0.0.1:3000/login-admin",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/login-admin": "" }
+  },
+  {
+    "context": ["/check-admin"],
+    "target": "http://127.0.0.1:3000/check-admin",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/check-admin": "" }
+  },
+  {
+    "context": ["/signout-admin"],
+    "target": "http://127.0.0.1:3000/signout-admin",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/signout-admin": "" }
+  },
+  {
+    "context": ["/isLoggedIn"],
+    "target": "http://127.0.0.1:3000/users/isLoggedIn",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/isLoggedIn": "" }
+  },
+  {
+    "context": ["/logout"],
+    "target": "http://127.0.0.1:3000/users/logout",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/logout": "" }
+  },
+  {
+    "context": ["/carts"],
+    "target": "http://127.0.0.1:3000/carts",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/carts": "" }
+  },
+  {
+    "context": ["/favorite"],
+    "target": "http://127.0.0.1:3000/favorite",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/favorite": "" }
+  },
+  {
+    "context": ["/orders"],
+    "target": "http://127.0.0.1:3000/orders",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/orders": "" }
+  }
+]

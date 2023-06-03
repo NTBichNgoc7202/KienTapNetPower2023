@@ -1,0 +1,138 @@
+<!-- Top bar Begin -->
+<div class="topbar container-fluid">
+  <p>Freeship cho mọi đơn đặt hàng</p>
+</div>
+<!-- Top bar End -->
+
+<!-- Header Begin -->
+<div class="container">
+  <div class="row">
+    <!-- left -->
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
+    <!-- logo -->
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+      <a href="">
+        <div class="header--center">
+          <img src="../../assets/images/home/DoraLogo.png" alt="" />
+        </div>
+      </a>
+    </div>
+    <!-- right -->
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+      <div class="header--right">
+        <a routerLink="/favorite" routerLinkActive="active"
+          ><i class="fa-solid bi bi-suit-heart-fill" aria-hidden="true"></i>
+          <div class="badge bg-danger">{{ totalFavorite }}</div>
+        </a>
+        <a routerLink="/shopping-cart" routerLinkActive="active">
+          <i class="fa-solid fa-shopping-cart" aria-hidden="true"></i>
+          <div class="badge bg-danger">{{ totalItem }}</div>
+        </a>
+        <a (click)="goToAccount()" id="account-management"
+          ><i class="fa-solid fa-user-circle" aria-hidden="true"></i
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Nav Begin -->
+<div class="sticky-nav-wrapper">
+  <div class="custom-nav-class" ngStickyNav>
+    <div class="nav" id="navbar">
+      <div class="container">
+        <!-- Nav PC -->
+        <nav class="nav-pc">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/home-page">TRANG CHỦ</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" routerLink="/products">SẢN PHẨM</a>
+              <ul class="dropdown-content">
+                <a *ngFor="let c of categories"
+                  ><li
+                    [innerText]="c.name"
+                    (click)="goToCategory(c.categoryId)"
+                  ></li
+                ></a>
+                <a><li (click)="goToProduct()">Tất cả</li></a>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/aboutus">VỀ CHÚNG TÔI</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/blogs">#DORA</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/contact">LIÊN HỆ</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Nav MOBILE -->
+        <div class="nav-mobile-bars">
+          <a href="">
+            <div class="nav-mobile-logo">
+              <img
+                src="../../assets/images/logo/mobile-logo.jpg"
+                alt=""
+                style="width: 150px; height: auto"
+              />
+            </div>
+          </a>
+          <div class="nav-mobile-end">
+            <div class="nav-mobile-icon">
+              <a routerLink="/favorite" routerLinkActive="active"
+                ><i
+                  class="fa-solid bi bi-suit-heart-fill"
+                  aria-hidden="true"
+                ></i>
+                <div class="badge bg-danger">{{ totalFavorite }}</div>
+              </a>
+              <a routerLink="/shopping-cart" routerLinkActive="active">
+                <i class="fa-solid fa-shopping-cart" aria-hidden="true"></i>
+                <div class="badge bg-danger">{{ totalItem }}</div>
+              </a>
+              <a routerLink="/login">
+                <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+              </a>
+            </div>
+            <label for="nav-mobile-input" class="nav-bars-btn">
+              <i class="fa-solid fa-bars" aria-hidden="true"></i
+            ></label>
+          </div>
+        </div>
+
+        <input type="checkbox" hidden class="nav-check" id="nav-mobile-input" />
+        <label for="nav-mobile-input" class="nav-overplay"></label>
+
+        <nav class="nav-mobile">
+          <label for="nav-mobile-input" class="nav-mobile-times-btn">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </label>
+          <ul class="nav-mobile-list">
+            <li>
+              <a routerLink="/home-page" class="nav-mobile-link">TRANG CHỦ</a>
+            </li>
+            <li>
+              <a routerLink="/products" class="nav-mobile-link">SẢN PHẨM</a>
+            </li>
+            <li>
+              <a routerLink="/aboutus" class="nav-mobile-link">VỀ CHÚNG TÔI</a>
+            </li>
+            <li>
+              <a routerLink="/blogs" class="nav-mobile-link">#DORA</a>
+            </li>
+            <li>
+              <a routerLink="/contact" class="nav-mobile-link">Liên hệ</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Nav End -->

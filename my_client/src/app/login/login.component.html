@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="login.component.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="container">
+      <input type="checkbox" id="flip" />
+      <div class="cover">
+        <div class="front">
+          <img src="../../assets/images/login signup/login.jpg" alt="" />
+          <div class="text">
+            <span class="text-1"
+              >Every new friend is a <br />
+              new adventure</span
+            >
+            <span class="text-2">Let's get connected</span>
+          </div>
+        </div>
+        <div class="back">
+          <img
+            class="backImg"
+            src="../../assets/images/login signup/login.jpg"
+            alt=""
+          />
+          <div class="text">
+            <span class="text-1"
+              >Complete miles of journey <br />
+              with one step</span
+            >
+            <span class="text-2">Let's get started</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="forms col-xs-12">
+        <form
+          [formGroup]="logForm"
+          #userForm="ngForm"
+          (ngSubmit)="loginUser(userForm.value)"
+        >
+          <div class="form-content">
+            <div class="login-form">
+              <div class="title">Đăng nhập</div>
+              <div class="input-boxes">
+                <div class="input-box">
+                  <i
+                    class="fas fa-solid fa-phone fa-flip-horizontal"
+                    style="color: #000000"
+                  ></i>
+                  <input
+                    type="text"
+                    id="phone"
+                    formControlName="phone"
+                    name="phone"
+                    [class.is-invalid]="phone.invalid && phone.touched"
+                    [(ngModel)]="user['phone']"
+                    placeholder="Số điện thoại"
+                    class="form-control"
+                  />
+                </div>
+                <div *ngIf="phone.invalid && phone.touched" class="my-2">
+                  <small *ngIf="phone.errors?.['required']" class="text-danger"
+                    >Số điện thoại không được để trống!</small
+                  >
+                  <small *ngIf="phone.errors?.['minlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
+                  <small *ngIf="phone.errors?.['maxlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
+                  <small *ngIf="phone.errors?.['pattern']" class="text-danger">
+                    Số điện thoại không hợp lệ!</small
+                  >
+                </div>
+                <div class="input-box">
+                  <i class="fas fa-lock"></i>
+                  <input
+                    type="password"
+                    name="pass"
+                    id="password"
+                    class="form-control"
+                    formControlName="pass"
+                    [class.is-invalid]="pass.invalid && pass.touched"
+                    [(ngModel)]="user['pass']"
+                    placeholder="Mật khẩu"
+                  />
+                </div>
+                <div *ngIf="pass.invalid && pass.touched" class="mt-2">
+                  <small *ngIf="pass.errors?.['required']" class="text-danger"
+                    >Mật khẩu không được để trống!
+                  </small>
+                </div>
+                <!-- <p style="margin-top: 5px;"></p> -->
+                <div class="text">
+                  <a
+                    class="item text-black"
+                    routerLink="/forgotpw"
+                    routerLinkActive="active"
+                    >Quên mật khẩu?</a
+                  >
+                </div>
+                <div class="button input-box">
+                  <input
+                    type="submit"
+                    value="Đăng nhập"
+                    [disabled]="!logForm.valid"
+                  />
+                </div>
+                <div class="text sign-up-text">
+                  Bạn chưa có tài khoản?
+                  <label
+                    routerLink="/regis"
+                    routerLinkActive="active"
+                    for="flip"
+                    >Đăng ký</label
+                  >
+                </div>
+              </div>
+              <div class="line"></div>
+              <div class="row justify-content-center mb-3">
+                <!-- <button class="btn btn-dark btn-sm mb-3 lg" (click)="onFeatureInDevelopment()"
+                style="height: 50px; background-color: #1B262C;">
+                Facebook
+              </button> -->
+                <button
+                  class="btn btn-dark btn-sm mb-3 lg"
+                  (click)="onFeatureInDevelopment()"
+                  style="height: 50px; background-color: #1b262c"
+                >
+                  Google
+                </button>
+              </div>
+              <div>
+                <a
+                  routerLink="/login-as-admin"
+                  routerLinkActive="active"
+                  class="item logadmin text-black"
+                  ><i class="bi bi-person-workspace"></i> Đăng nhập quản trị</a
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

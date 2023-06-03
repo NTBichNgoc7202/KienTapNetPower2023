@@ -1,0 +1,99 @@
+<!-- Breadcrumb Section Begin -->
+<div class="breadcrumb-option">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="breadcrumb__text">
+          <h4>Giỏ hàng</h4>
+          <div class="breadcrumb__links">
+            <a href="">Trang chủ</a>
+            <a href="">Sản phẩm</a>
+            <span>Wish list</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb Section End -->
+
+<!-- Shopping favorite Section Begin -->
+<ng-container class="shopping-favorite">
+  <ng-container class="shopping-favorite">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12" style="padding: 0px">
+          <div class="card d-flex flex-column shopping__favorite__table">
+            <table class="card-body">
+              <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>Sản phẩm</th>
+                  <th style="text-align: center;">Xóa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let p of favorite; index as i">
+                  <td>{{ i + 1 }}</td>
+                  <td class="product__favorite__item" (click)="onSelect(p._id)">
+                    <div class="product__favorite__item__pic">
+                      <img style="width: 100px" src="{{ p.image }}" alt="" />
+                    </div>
+                    <div class="product__favorite__item__text">
+                      <h6>
+                        <strong>{{ p.name }}</strong>
+                      </h6>
+                      <h6>{{ p.price | currency:'VND':'symbol-narrow':'6.0-3'}}</h6>
+                    </div>
+                  </td>
+
+                  <td style="text-align: center;">
+                    <button (click)="delete(p._id)" class="btn btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="continue__btn">
+                <a href="#" routerLink="/home-page" routerLinkActive="active"
+                  ><i class="fa-solid fa-arrow-left"></i> Tiếp tục mua sắm</a
+                >
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+              <div class="continue__btn remove__btn">
+                <a (click)="emptyFavorite()"
+                  ><i class="fa-solid fa-x"></i> Xóa toàn bộ</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="favorite.length == 0">
+    <div class="container">
+      <div class="text-center card mx-auto d-block">
+        <i class="bi bi-search-heart fa-10x"></i>
+        <h5><strong>Danh mục yêu thích của bạn đang trống</strong></h5>
+        <p>Hãy thêm sản phẩm yêu thích vào đây</p>
+        <button
+          class="continue__btn"
+          routerLink="/home-page"
+          routerLinkActive="active"
+          class="primary-btn"
+        >
+          Mua sắm ngay
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

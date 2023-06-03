@@ -1,0 +1,301 @@
+/*---------------------
+  Topbar
+-----------------------*/
+
+.topbar {
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+}
+
+.topbar p {
+    height: 50px;
+    line-height: 50px;
+    color: white;
+}
+
+li {
+    cursor: pointer;
+}
+
+#account-management {
+    cursor: pointer;
+}
+
+
+/*---------------------
+Header
+-----------------------*/
+
+
+/* center: logo */
+
+.header--center {
+    text-align: center;
+    line-height: 170px;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.header--center > img{
+    width: auto;
+    height: 90px;
+}
+
+
+/* right: cart, account */
+
+.header--right {
+    display: flex;
+    justify-content: flex-end;
+    height: 11.25rem;
+    line-height: 12.25rem;
+    margin-right: 0.5rem;
+}
+
+.header--right a i,
+.nav-mobile-icon a i {
+    font-size: 25px;
+    padding-left: 20px;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+.header--right a div,
+.nav-mobile-icon a div {
+    font-size: 10px;
+}
+
+
+/*---------------------
+NavBar PC
+-----------------------*/
+
+
+/* navbar */
+
+.nav {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    background-color: white;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.nav-list {
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 4px;
+    justify-content: center;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-link {
+    font-weight: 700;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75) !important;
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    transform: scale(1.03);
+    color: black;
+}
+
+.nav-mobile-logo,
+.nav-mobile-icon {
+    display: none;
+}
+
+
+/* dropdown */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 250px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 0;
+    margin-left: -1rem;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+}
+
+.dropdown-content a li {
+    color: black;
+    padding: 0.75rem 2rem;
+    display: block;
+    transition: all .1s ease;
+}
+
+.dropdown-content a li:hover {
+    background-color: #f1f1f1;
+    font-weight: 700;
+    transform: scale(1.005);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/*---------------------
+NavBar PC
+-----------------------*/
+
+
+/* navbar */
+
+.nav-mobile-bars {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bars-btn i {
+    display: none;
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.75);
+    margin-top: 5px;
+}
+
+
+/* check */
+
+.nav-check:checked~.nav-overplay {
+    display: block;
+}
+
+.nav-check:checked~.nav-mobile {
+    transform: translateX(0%);
+    opacity: 1;
+}
+
+
+/* show */
+
+.nav-overplay {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+    animation: fadeIn linear 0.2s, opacity linear 0.2s;
+}
+
+.nav-mobile {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 250px;
+    max-width: 100%;
+    background-color: white;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform linear 0.25s;
+}
+
+.nav-mobile-list {
+    margin-left: 25px;
+    margin-top: 60px;
+    list-style: none;
+}
+
+.nav-mobile-link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75);
+    display: block;
+    padding: 8px 0;
+    font-weight: 700;
+}
+
+.nav-mobile-link:hover {
+    color: black;
+}
+
+.nav-mobile-times-btn {
+    font-size: 28px;
+    color: rgba(0, 0, 0, 0.65);
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.nav-mobile-end {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/*---------------------
+Sticky
+-----------------------*/
+
+.custom-nav-class {
+    width: 100%;
+    z-index: 100;
+}
+
+
+/*---------------------
+Responsive
+-----------------------*/
+
+@media (max-width:1023px) {
+    .header {
+        height: 128px;
+    }
+    .nav-bars-btn i {
+        margin-top: 12px;
+        display: block;
+    }
+    .nav-pc,
+    .header--right,
+    .header--center {
+        display: none;
+    }
+    .nav-mobile-link {
+        font-size: 16px;
+    }
+    .nav-mobile-logo,
+    .nav-mobile-icon {
+        display: block;
+    }
+    .nav-mobile-icon {
+        margin-top: 12px;
+        margin-right: 28px;
+    }
+}
+
+@media (max-width:414px) {
+    .nav-mobile-logo {
+        width: 100px;
+    }
+    .nav-mobile-icon a i {
+        font-size: 22px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

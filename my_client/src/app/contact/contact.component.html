@@ -1,0 +1,157 @@
+<!-- Map Begin -->
+<div class="map">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15672.934503514487!2d106.77828036160881!3d10.869827234562054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175277dbf11a271%3A0x4567e34b99494e3f!2sVietnam%20National%20University%20HCM%2C%20University%20of%20Economics%20and%20Law!5e0!3m2!1sen!2s!4v1680798534269!5m2!1sen!2s"
+    height="500"
+    style="border: 0"
+    allowfullscreen="true"
+    aria-hidden="false"
+    tabindex="0"
+    loading="lazy"
+  >
+  </iframe>
+</div>
+<!-- Map End -->
+
+<!-- Contact Section Begin -->
+<section class="contact spad">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__text">
+          <div class="section-title">
+            <span>Information</span>
+            <h2>Contact Us</h2>
+            <p>
+              As you might expect of a company that began as a high-end
+              interiors contractor, we pay strict attention.
+            </p>
+          </div>
+          <ul>
+            <li>
+              <h4>VietNam</h4>
+              <p>
+                669 quốc lộ 1A, phường Linh Xuân, Thành Phố Thủ Đức <br />+09 030-749-95
+              </p>
+            </li>
+            <li>
+              <h4>Japan</h4>
+              <p>109 Avenue Léon, 63 Clermont-Ferrand <br />+12 345-423-9893</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="contact__form">
+          <form
+            id="form-container"
+            [formGroup]="fbForm"
+            #feedbackForm="ngForm"
+            (ngSubmit)="sendFeedback(feedbackForm.value)"
+          >
+            <div class="section-title">
+              <h2>FEEDBACK</h2>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <input
+                  type="text "
+                  placeholder="Name "
+                  id="username"
+                  class="form-control mb-3"
+                  formControlName="username"
+                  name="username"
+                  [(ngModel)]="feedback['username']"
+                  [class.is-invalid]="username.invalid && username.touched"
+                />
+                <div *ngIf="username.invalid && username.touched" class="my-2">
+                  <small
+                    *ngIf="username.errors?.['required']"
+                    class="text-danger"
+                    >Họ và tên không được để trống!</small
+                  >
+                  <small
+                    *ngIf="username.errors?.['minlength']"
+                    class="text-danger"
+                    >Họ và tên bắt buộc trên 2 ký tự!</small
+                  >
+                  <small
+                    *ngIf="username.errors?.['nameNotMatch']"
+                    class="text-danger"
+                    >Họ và tên không được chứa ký tự đặc biệt</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <input
+                  type="text"
+                  id="useremail"
+                  class="form-control mb-3"
+                  formControlName="useremail"
+                  name="useremail"
+                  [(ngModel)]="feedback['useremail']"
+                  [class.is-invalid]="useremail.invalid && useremail.touched"
+                  placeholder="Email"
+                />
+                <div
+                  *ngIf="useremail.invalid && useremail.touched"
+                  class="my-2"
+                >
+                  <small
+                    *ngIf="useremail.errors?.['required']"
+                    class="text-danger"
+                    >Email không được để trống!</small
+                  >
+                  <small *ngIf="useremail.errors?.['email']" class="text-danger"
+                    >Email không hợp lệ!</small
+                  >
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <textarea
+                  placeholder="Message "
+                  class="form-control mb-3"
+                  formControlName="usermessage"
+                  name="usermessage"
+                  [(ngModel)]="feedback['usermessage']"
+                  [class.is-invalid]="
+                    usermessage.invalid && usermessage.touched
+                  "
+                >
+                </textarea>
+                <div
+                  *ngIf="usermessage.invalid && usermessage.touched"
+                  class="my-2"
+                >
+                  <small
+                    *ngIf="usermessage.errors?.['required']"
+                    class="text-danger"
+                    >Nội dung không được để trống!</small
+                  >
+                  <small
+                    *ngIf="usermessage.errors?.['minlength']"
+                    class="text-danger"
+                    >Nội dung phải trên 10 ký tự!</small
+                  >
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="site-btn" [disabled]="!fbForm.valid">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contact Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+  <div class="h-100 d-flex align-items-center justify-content-center">
+    <div class="search-close-switch">+</div>
+    <form class="search-model-form">
+      <input type="text " id="search-input " placeholder="Search here..... " />
+    </form>
+  </div>
+</div>
+<!-- Search End -->
