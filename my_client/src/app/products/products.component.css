@@ -801,6 +801,8 @@ Product
 }
 
 .product__item__pic {
+  /* max-height: 190px;
+  max-width: auto; */
   height: 100%;
   width: 100%;
   position: relative;
@@ -938,6 +940,8 @@ Product
 }
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
+
+
 
 /* Tablet Device = 768px */
 

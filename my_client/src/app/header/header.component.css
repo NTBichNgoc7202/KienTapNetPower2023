@@ -3,13 +3,14 @@
 -----------------------*/
 
 .topbar {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(238,45,122);
     text-align: center;
+    height: 35px;
 }
 
 .topbar p {
-    height: 50px;
-    line-height: 50px;
+    height: 20px;
+    line-height: 30px;
     color: white;
 }
 
@@ -38,7 +39,7 @@ Header
 }
 .header--center > img{
     width: auto;
-    height: 90px;
+    height: 130px;
 }
 
 

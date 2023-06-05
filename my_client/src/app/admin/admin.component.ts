@@ -23,9 +23,9 @@ export class AdminComponent implements OnInit {
   changeIdToName(id: string) {
     switch (id) {
       case '01':
-        return 'vòng tay';
+        return 'chăm sóc da mặt';
       case '02':
-        return 'dây chuyền';
+        return 'chăm sóc cơ thể';
       case '03':
         return 'hoa tai';
       case '04':
