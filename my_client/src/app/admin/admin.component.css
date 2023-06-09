@@ -40,12 +40,15 @@
 }
 .add-product >button{
  padding: 15px 20px;
- border-radius: 5px;
+ border: 1px solid white;
+ color: #FFF;
+ border-radius: 10px;
+ background-color: #FF90AA;
 }
 
 .add-product >button:hover{
   color: white;
-  background-color: black;
+  background-color: #EE2D7A;
  }
 
  .delete-button > button{
