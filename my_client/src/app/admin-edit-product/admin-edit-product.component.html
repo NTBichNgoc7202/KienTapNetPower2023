@@ -79,6 +79,17 @@
                 [(ngModel)]="product.note"
               />
             </div>
+            <div class="mb-3">
+              <label for="description">Chi tiết sản phẩm:</label><br />
+              <input
+                type="text"
+                class="form-control"
+                id="description"
+                name="description"
+                placeholder="Nhập thông tin mô tả sản phẩm"
+                [(ngModel)]="product.description"
+              />
+            </div>
           <div class="mb-3 text-center">
             <button type="submit" class="btn me-3">Lưu</button>
             <button (click)="onBack()">Quay lại</button>
