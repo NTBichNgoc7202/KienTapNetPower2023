@@ -25,7 +25,7 @@ import { MatSort } from '@angular/material/sort';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
-  encapsulation : ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductsComponent implements OnInit {
   @ViewChild('toggleButton') toggleButton!: ElementRef;
@@ -128,7 +128,7 @@ export class ProductsComponent implements OnInit {
       next: (data) => {
         this.productList = data;
         this.length = this.productList.length;
-        this.paginator.firstPage()
+        this.paginator.firstPage();
       },
       error: (err) => (this.errMess = err.message),
     });
@@ -144,7 +144,7 @@ export class ProductsComponent implements OnInit {
     this.Notification();
     p.quantity = 1;
     this.shoppingCartService.postProductToCart(p).subscribe({
-      next: (data) => {     
+      next: (data) => {
         this.Notification();
         this.shoppingCartService.setTotalItems();
       },
@@ -169,7 +169,7 @@ export class ProductsComponent implements OnInit {
   onSelect(id: any) {
     this._router.navigate(['product-detail', id]);
   }
-  descendant() {
+  descendantPrice() {
     this.productList.sort((a: any, b: any) => {
       if (Number(a.price) > Number(b.price)) {
         return -1;
@@ -180,7 +180,7 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
-  ascendant() {
+  ascendantPrice() {
     this.productList.sort((a: any, b: any) => {
       if (Number(a.price) < Number(b.price)) {
         return -1;
@@ -191,22 +191,59 @@ export class ProductsComponent implements OnInit {
       }
     });
   }
+  ascendentName() {
+    this.productList.sort((a: any, b: any) => {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  descendantName() {
+    this.productList.sort((a: any, b: any) => {
+      if (a.name > b.name) {
+        return -1;
+      } else if (a.name < b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
   onEditClick($event: any) {
-    if ($event.target.value == '1') {
-      this.ascendant();
-    } else if ($event.target.value == '-1') {
-      this.descendant();
+    switch ($event.target.value) {
+      case '1':
+        this.ascendantPrice();
+        break;
+      case '-1':
+        this.descendantPrice();
+        break;
+      case '2':
+        this.ascendentName();
+        break;
+      case '-2':
+        this.descendantName();
+        break;
+      default:
+        this.productList = this.originalProductList;
+        break;
     }
   }
   showAll() {
     this.productList = this.originalProductList;
     this.length = this.productList.length;
-    this.paginator.firstPage()
+    this.paginator.firstPage();
   }
   sortByTags(tag: string) {
     this.tag = tag;
-    this.productList = this.originalProductList.filter((x: any) => x.note == tag);
+    this.productList = this.originalProductList.filter(
+      (x: any) => x.note == tag
+    );
     this.length = this.productList.length;
-    this.paginator.firstPage()
+    this.paginator.firstPage();
   }
 }

@@ -5,17 +5,17 @@
       <h4 class="text-center text-white mt-3 mb-3">QUÊN MẬT KHẨU</h4>
       <p class="text-center text-white">
         Nhập lại số điện thoại và nhấn vào nút ở phía dưới, nhân viên chăm sóc
-        khách hàng của Dora sẽ gọi vào số điện thoại quý khách và cung cấp
-        lại mật khẩu mới cho quý khách. Xin cảm ơn quý khách.
+        khách hàng của Glowy sẽ gọi vào số điện thoại quý khách và cung cấp lại
+        mật khẩu mới cho quý khách. Xin cảm ơn quý khách.
       </p>
       <input
-      type="text"
-      class="form-control mb-3 w-75 mx-auto"
-      name="phone"
-      [(ngModel)]="newPassword"
-      [hidden]="!isSubmited"
-      [readOnly]="true"
-    />
+        type="text"
+        class="form-control mb-3 w-75 mx-auto"
+        name="phone"
+        [(ngModel)]="newPassword"
+        [hidden]="!isSubmited"
+        [readOnly]="true"
+      />
       <form
         id="form-container"
         [formGroup]="fgForm"
@@ -49,8 +49,11 @@
           >
         </div>
         <div class="row justify-content-center">
-          <button class="btn btn-light btn-sm lg mb-3 mt-3" type="submit"
-          [disabled]="!fgForm.valid">
+          <button
+            class="btn btn-light btn-sm lg mb-3 mt-3"
+            type="submit"
+            [disabled]="!fgForm.valid"
+          >
             Cấp lại mật khẩu
           </button>
         </div>
