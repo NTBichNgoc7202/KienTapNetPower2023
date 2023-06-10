@@ -17,8 +17,8 @@ export class Product {
     this.categoryId = '';
     this.quantity = 1;
     this.image = '';
-    this.createdAt = '';
-    this.modifiedAt = '';
+    this.createdAt = new Date().toISOString();
+    this.modifiedAt = new Date().toISOString();
     this.description = '';
   }
 }

@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const path = require('path');
+const path = require("path");
 global.appRoot = path.resolve(__dirname);
 
 app.use(express.json({ limit: "10mb" }));
@@ -40,7 +40,7 @@ app.use(morgan("combined"));
 const cors = require("cors");
 app.use(cors());
 
-const doraRoutes = require("./routes/dora.router");
+const glowyRoutes = require("./routes/glowy.router");
 const productRoutes = require("./routes/product.router");
 const cartRoutes = require("./routes/cart.router");
 const favoriteRoutes = require("./routes/favorite.router");
@@ -49,7 +49,7 @@ const userRouters = require("./routes/user.router");
 const regisEmailRouters = require("./routes/regisEmail.router");
 const feedbackRouters = require("./routes/feedback.router");
 const blogRouters = require("./routes/blog.router");
-app.use("/", doraRoutes);
+app.use("/", glowyRoutes);
 app.use("/products", productRoutes);
 app.use("/carts", cartRoutes);
 app.use("/favorite", favoriteRoutes);
@@ -59,10 +59,12 @@ app.use("/regisEmail", regisEmailRouters);
 app.use("/feedback", feedbackRouters);
 app.use("/blogs", blogRouters);
 
-app.get("/test", (req, res) => {});
+app.get("/test", (req, res) => {
+  res.send("Hello World!");
+});
 
-var server = app.listen(port,"127.0.0.1", () => {
-    var host = server.address().address
-    var port = server.address().port
+var server = app.listen(port, "127.0.0.1", () => {
+  var host = server.address().address;
+  var port = server.address().port;
   console.info(`listening on port ${port} at http://${host}:${port}`);
 });
