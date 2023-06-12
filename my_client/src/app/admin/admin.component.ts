@@ -23,15 +23,15 @@ export class AdminComponent implements OnInit {
   changeIdToName(id: string) {
     switch (id) {
       case '01':
-        return 'chăm sóc da mặt';
+        return 'Chăm Sóc Da Mặt';
       case '02':
-        return 'chăm sóc cơ thể';
+        return 'Chăm Sóc Cơ Thể';
       case '03':
-        return 'hoa tai';
+        return 'Chăm Sóc Tóc';
       case '04':
-        return 'nhẫn';
+        return 'Trang Điểm';
       case '05':
-        return 'charm';
+        return 'chăm Sóc Cá nhân';
       default:
         return '';
     }
