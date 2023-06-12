@@ -19,7 +19,7 @@ export class FgpwService {
       .post(`${baseUrl}/users/Fgpw`, data)
       .pipe(retry(3), catchError(this.handleError));
   }
-  changePassword(_id:string,oldPass: string, newPass: string):Observable<any> {
+  changePassword(phone:string,oldPass: string, newPass: string):Observable<any> {
     const headers = new HttpHeaders().set(
       'Content-Type',
       'application/json;charset=utf-8'
@@ -29,7 +29,7 @@ export class FgpwService {
       responseType: 'text',
     };
     let data = {
-      _id:_id,
+      phone:phone,
       oldPass: oldPass,
       newPass: newPass,
     };

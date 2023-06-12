@@ -80,6 +80,7 @@ productRouter.put("", async (req, res) => {
       categoryId: req.body.categoryId,
       image: req.body.image,
       note: req.body.note,
+      description: req.body.description,
     },
   }).then((docs, err) => {
     if (docs) {

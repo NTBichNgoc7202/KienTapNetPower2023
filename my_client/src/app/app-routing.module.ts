@@ -17,7 +17,6 @@ import { AdminEditProductComponent } from './admin-edit-product/admin-edit-produ
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { AccountComponent } from './account/account.component';
-import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { ContactComponent } from './contact/contact.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { AdminCustomerComponent } from './admin-customer/admin-customer.component';
@@ -47,7 +46,6 @@ const routes: Routes = [
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'blog-detail/:id', component: BlogDetailComponent },
   { path: 'account/:phone', component: AccountComponent },
-  { path: 'edit-password', component: EditPasswordComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'admin-customer', component: AdminCustomerComponent },
   {path: 'editUser/:id', component: AdminEditCustomerComponent},

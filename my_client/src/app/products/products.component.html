@@ -49,7 +49,12 @@
                           [innerText]="c.name"
                         ></a>
                       </li>
-                      <li><a (click)="getProducts();this.paginator.firstPage()" [innerText]="'Tất cả'"></a></li>
+                      <li>
+                        <a
+                          (click)="getProducts(); this.paginator.firstPage()"
+                          [innerText]="'Tất cả'"
+                        ></a>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -95,10 +100,12 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-6">
             <div class="shop__product__option__right">
-              <p>Tìm kiếm theo giá: &nbsp;</p>
+              <p>Sắp xếp theo: &nbsp;</p>
               <select [(ngModel)]="sortByPrice" (change)="onEditClick($event)">
-                <option value="1">Thấp đến cao</option>
-                <option value="-1">Cao đến thấp</option>
+                <option value="1">Giá tăng dần</option>
+                <option value="-1">Giá giảm dần</option>
+                <option value="2">Từ A đến Z</option>
+                <option value="-2">Từ Z về A</option>
               </select>
             </div>
           </div>
@@ -109,7 +116,10 @@
           class="col-xl-3 col-lg-4 col-md-3 col-sm-3 col-md-4 col-sm-3"
           *ngFor="let p of productList; index as i"
         >
-          <div class="product__item" *ngIf="i < limitToShow && i >= startToShow">
+          <div
+            class="product__item"
+            *ngIf="i < limitToShow && i >= startToShow"
+          >
             <div class="product__item__pic">
               <div (click)="onSelect(p._id)">
                 <img class="product__item__pic set-bg" src="{{ p.image }}" />

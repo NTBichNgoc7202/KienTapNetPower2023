@@ -30,7 +30,6 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { AccountComponent } from './account/account.component';
-import { EditPasswordComponent } from './edit-password/edit-password.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { ContactComponent } from './contact/contact.component';
 import { FavoriteComponent } from './favorite/favorite.component';
@@ -61,7 +60,6 @@ import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-cus
     ProductDetailComponent,
     BlogDetailComponent,
     AccountComponent,
-    EditPasswordComponent,
     ContactComponent,
     FavoriteComponent,
     AdminAddProductComponent,
