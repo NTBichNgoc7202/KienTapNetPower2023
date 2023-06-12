@@ -1,0 +1,12 @@
+.tab-content {
+  flex: 1;
+  margin: auto;
+}
+
+table{
+  font-size: 12px;
+}
+
+table th{
+  text-align: center;
+}

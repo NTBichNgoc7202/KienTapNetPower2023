@@ -1,0 +1,36 @@
+<div class="tab-content p-4 p-md-12" id="v-pills-tabContent">
+  <div id="account111" class="tab-pane fade show active" role="tabpanel" aria-labelledby="account-tab">
+    <h3 class="mb-4">Thông tin tài khoản</h3>
+    <div class="row" ng-repeat="u in users">
+      <div class="col-xl-6 col-lg-6 col-md-12">
+        <div class="form-group">
+          <label>Họ và tên</label>
+          <input type="text" class="form-control" value="{{ userInfo.username }}" />
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" class="form-control" value="{{ userInfo.useremail }}" />
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12">
+        <div class="form-group">
+          <label>Số điện thoại</label>
+          <input type="text" class="form-control" value="{{ userInfo.phone }}" />
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12">
+        <div class="form-group">
+          <label>Địa chỉ</label>
+          <input type="text" class="form-control" value="{{ userInfo.address }}" />
+        </div>
+      </div>
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="openForm()">
+        Thay đổi
+      </button>
+    </div>
+  </div>
+</div>

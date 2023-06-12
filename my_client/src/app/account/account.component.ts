@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserserviceService } from '../service/userservice.service';
 import { Router } from '@angular/router';
-import { User } from '../models/users';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { FavoriteService } from '../service/favorite.service';
 import { ToastrService } from 'ngx-toastr';
-import { OrderService } from '../service/order.service';
-import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { FgpwService } from '../service/fgpw.service';
-import { UntypedFormBuilder, NgForm, Validators } from '@angular/forms';
+import { User } from '../models/users';
 
 @Component({
   selector: 'app-account',
@@ -17,163 +13,138 @@ import { UntypedFormBuilder, NgForm, Validators } from '@angular/forms';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent implements OnInit {
-  userInfo: User = new User();
   phone: string | null = null;
-  orders: any = [];
-  isOnProfile: boolean = true;
-  isOnGetOrder: boolean = false;
-  isOnEditPassword: boolean = false;
-  // change password
-  public resetPasswordForm: any;
-  user: User = new User();
-  newPassword: string = '';
-  reTypePassword: string = '';
+  userInfo: User = new User();
   constructor(
-    private userService: UserserviceService,
-    private orderService: OrderService,
+    private _userService: UserserviceService,
     private _activatedRoute: ActivatedRoute,
-    private shoppingCartService: ShoppingCartService,
-    private favoriteService: FavoriteService,
-    private toastr: ToastrService,
-    private router: Router,
-    private _formBuilder: UntypedFormBuilder,
-    private _service: FgpwService
-  ) {}
+    private _shoppingCartService: ShoppingCartService,
+    private _favoriteService: FavoriteService,
+    private _toastr: ToastrService,
+    private _router: Router
+  ) { }
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((params) => {
       this.phone = params.get('phone');
       if (this.phone != null) {
         this.isTrueCredentials();
-        this.loadPersonalData(this.phone);
       } else {
-        this.router.navigate(['/login']);
+        this._router.navigate(['/login']);
       }
     });
-    // change password
-    this.resetPasswordForm = this._formBuilder.group(
-      {
-        oldPass: ['', [Validators.required]],
-        newPass: ['', [Validators.required]],
-        reTypePass: ['', [Validators.required]],
-      },
-      { validators: this.passwordValidator }
-    );
   }
   isTrueCredentials() {
-    this.userService.checkIsLoggedIn().subscribe({
+    this._userService.checkIsLoggedIn().subscribe({
       next: (data) => {
         if (data.message == 'Unauthorized') {
-          this.router.navigate(['/login']);
+          this._router.navigate(['/login']);
+          return;
         }
         if (data.user.phone != this.phone) {
-          this.toastr.error(
+          this._toastr.error(
             'You are not allowed to access this page with this account!'
           );
-          this.router.navigate(['/']);
+          this._router.navigate(['/']);
+          return;
         }
+        this.loadPersonalData(this.phone);
       },
+    });
+  }
+  onLogoutClick() {
+    this._userService.logOutUser().subscribe({
+      next: (data) => {
+        // Receive data (session) from server
+        this._favoriteService.setTotalFavorites();
+        this._shoppingCartService.setTotalItems();
+        this._router.navigate(['/login']);
+      },
+      error: (err) => console.log(err),
     });
   }
   loadPersonalData(phone: any) {
-    this.userService.getUserByPhone(phone).subscribe({
+    this._userService.getUserByPhone(phone).subscribe({
       next: (data) => {
         this.userInfo = data;
-        this.getOrderOfUser();
+        // this.onChangeProfileClick()
       },
       error: (err) => console.log(err),
     });
   }
-  onChangeSection(screenName: string) {
-    this.isOnGetOrder = false;
-    this.isOnProfile = false;
-    this.isOnEditPassword = false;
-    switch (screenName) {
-      case 'profile':
-        this.isOnProfile = true;
-        break;
-      case 'getOrder':
-        this.isOnGetOrder = true;
-        break;
-      case 'editPassword':
-        this.isOnEditPassword = true;
-        break;
-      default:
-        break;
-    }
+  getPhoneQueryParam() {
+    return {
+      phone: this.phone,
+    };
   }
-  onLogoutClick() {
-    this.userService.logOutUser().subscribe({
-      next: (data) => {
-        // Receive data (session) from server
-        this.favoriteService.setTotalFavorites();
-        this.shoppingCartService.setTotalItems();
-        this.router.navigate(['/login']);
-      },
-      error: (err) => console.log(err),
-    });
+  getUniqueQueryParam() {
+    return {
+      unique_id: this.userInfo.unique_id,
+    };
   }
-  getOrderOfUser() {
-    this.orderService.getOrderById(this.userInfo.unique_id).subscribe({
-      next: (data) => {
-        this.orders = data;
-      },
-      error: (err) => console.log(err),
-    });
-  }
-  // change password
-  resetPassword(form: NgForm) {
-    this._service
-      .changePassword(
-        this.userInfo.phone,
-        this.user.pass,
-        this.newPassword
-      )
-      .subscribe({
-        next: (res) => {
-          let resData: any = JSON.parse(res);
-          if (resData.message === 'success') {
-            this.toastr.success(
-              `Bạn đã thay đổi mật khẩu thành công`,
-              'ĐỔI MẬT KHẨU',
-              {
-                timeOut: 100000,
-              }
-            );
-            setTimeout(() => {
-              this.router.navigate(['home-page']);
-            }, 2000);
-          } else {
-            this.toastr.error('Mật khẩu cũ không chính xác', 'ĐỔI MẬT KHẨU');
-          }
+  // This is another way to navigate to a component with outlet. But it is a stupid way.
+  // <a [routerLink]="[{ outlets: { account: ['change-profile'] } }]" [queryParams]="getPhoneQueryParam()"></a>
+  onChangeProfileClick() {
+    this._router.navigate(
+      [
+        `account/${this.userInfo.phone}`,
+        {
+          outlets: {
+            account: ['change-profile'],
+          },
         },
-        error: (err) => {
-          console.log(err);
+      ],
+      {
+        queryParams: this.getPhoneQueryParam(),
+        skipLocationChange: true,
+      }
+    );
+  };
+  onOrderHistoryClick() {
+    this._router.navigate(
+      [
+        `account/${this.userInfo.phone}`,
+        {
+          outlets: {
+            account: ['order-history'],
+          },
         },
-      });
-  }
-  forgetPassword() {
-    this.router.navigate(['forgotpw']);
-  }
-  get oldPass() {
-    return this.resetPasswordForm.controls['oldPass'];
-  }
-  get newPass() {
-    return this.resetPasswordForm.controls['newPass'];
-  }
-  get reTypePass() {
-    return this.resetPasswordForm.controls['reTypePass'];
-  }
-  passwordValidator(control: AbstractControl): { [key: string]: any } | null {
-    const newPass = control.get('newPass');
-    const confirmPass = control.get('reTypePass');
-    if (
-      (newPass && newPass.pristine) ||
-      (confirmPass && confirmPass.pristine)
-    ) {
-      return null;
-    }
-    return newPass && confirmPass && newPass.value !== confirmPass.value
-      ? { misMatch: true }
-      : null;
-  }
+      ],
+      {
+        queryParams: this.getUniqueQueryParam(),
+        skipLocationChange: true,
+      }
+    );
+  };
+  onEditPasswordClick() {
+    this._router.navigate(
+      [
+        `account/${this.userInfo.phone}`,
+        {
+          outlets: {
+            account: ['edit-password'],
+          },
+        },
+      ],
+      {
+        queryParams: this.getPhoneQueryParam(),
+        skipLocationChange: true,
+      }
+    );
+  };
+  onChangeAddressClick() {
+    this._router.navigate(
+      [
+        `account/${this.userInfo.phone}`,
+        {
+          outlets: {
+            account: ['change-address'],
+          },
+        },
+      ],
+      {
+        queryParams: this.getPhoneQueryParam(),
+        skipLocationChange: true,
+      }
+    );
+  };
 }

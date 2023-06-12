@@ -17,24 +17,34 @@
           </div>
           <div class="nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <!-- Profile section -->
-            <a (click)="onChangeSection('profile')"
+            <a  (click)="onChangeProfileClick()"
               class="bold-hover-nav nav-link active col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6" id="account-tab"
               data-toggle="pill" role="tab" aria-controls="account" aria-selected="true">
               <i class="fa-solid fa-user text-center mr-1" style="color: #000000"></i>
               <span class="nav-text">User Profile</span>
             </a>
             <!-- Order section -->
-            <a (click)="onChangeSection('getOrder')" class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
-              id="history-tab" data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
+            <a (click)="onOrderHistoryClick()"
+              class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6" id="history-tab"
+              data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
               <i class="fa-solid fa-cart-shopping" style="color: #000000"></i>
               <span class="nav-text">Order History</span>
             </a>
             <!-- Edit password section -->
-            <a (click)="onChangeSection('editPassword')" class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6"
-            id="history-tab" data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
-            <i class="fa-solid fa-pencil-square-o" style="color: #000000"></i>
-            <span class="nav-text">Edit password</span>
+            <a (click)="onEditPasswordClick()"
+              class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6" id="history-tab"
+              data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
+              <i class="fa-solid fa-pencil-square-o" style="color: #000000"></i>
+              <span class="nav-text">Edit password</span>
+            </a>
+            <!-- Change address section -->
+            <a (click)="onChangeAddressClick()"
+            class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-6 col-6" id="history-tab"
+            data-toggle="pill" role="tab" aria-controls="history" aria-selected="false">
+            <i class="fa-solid fa-address-book-o" style="color: #000000"></i>
+            <span class="nav-text">Change address</span>
           </a>
+            <!-- Log out section -->
             <a (click)="onLogoutClick()" class="bold-hover-nav nav-link col-xs-12 col-lg-12 col-md-12 col-sm-12 col-12"
               id="logout-tab" data-toggle="pill" role="tab" aria-controls="logout" aria-selected="false">
               <i class="fas fa-solid fa-right-from-bracket fa-flip-horizontal" style="color: #000000"></i>
@@ -42,155 +52,9 @@
             </a>
           </div>
         </div>
-        <div class="tab-content p-4 p-md-12" id="v-pills-tabContent" *ngIf="isOnProfile">
-          <div id="account111" class="tab-pane fade show active" role="tabpanel" aria-labelledby="account-tab">
-            <h3 class="mb-4">Thông tin tài khoản</h3>
-            <div class="row" ng-repeat="u in users">
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <div class="form-group">
-                  <label>Họ và tên</label>
-                  <input type="text" class="form-control" value="{{ userInfo.username }}" />
-                </div>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="text" class="form-control" value="{{ userInfo.useremail }}" />
-                </div>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <div class="form-group">
-                  <label>Số điện thoại</label>
-                  <input type="text" class="form-control" value="{{ userInfo.phone }}" />
-                </div>
-              </div>
-              <div class="col-xl-6 col-lg-6 col-md-12">
-                <div class="form-group">
-                  <label>Địa chỉ</label>
-                  <input type="text" class="form-control" value="{{ userInfo.address }}" />
-                </div>
-              </div>
-            </div>
-            <div>
-              <button class="btn btn-primary" onclick="openForm()">
-                Thay đổi
-              </button>
-            </div>
-          </div>
-        </div>
-        <div class="tab-content p-4 p-md-12" id="v-pills-tabContent" *ngIf="isOnGetOrder">
-          <div class="table-striped table-responsive-sm table-responsive-md table-responsive-lq table-responsive-xl">
-            <table class="table">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col" class="align-middle">STT</th>
-                  <th class="text-center" scope="col" class="align-middle">
-                    Tổng tiền
-                  </th>
-                  <th class="text-center" scope="col" class="align-middle">
-                    Các sản phẩm
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="aligh-middle" *ngFor="let order of orders; let i = index">
-                  <th class="align-middle" scope="row">{{ i + 1 }}</th>
-                  <td class="align-middle">{{ order.totalPrice }}</td>
-                  <td class="align-middle">
-                    <div *ngFor="let item of order.products">
-                      <div class="row">
-                        <div
-                          class="col-3 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
-                          <img class="img-size" [src]="item.image" alt="" />
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-6 col-lg-9 col-xl-9">
-                          <strong>{{ item.name }}</strong>
-                          <div>Price: {{ item.price }}</div>
-                          <div>Quantity: {{ item.quantity }}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="col-12 col-md-7 col-sm-12 col-lg-9" *ngIf="isOnEditPassword">
-          <form
-            class="mt-5"
-            [formGroup]="resetPasswordForm"
-            #userForm="ngForm"
-            (ngSubmit)="resetPassword(userForm.value)"
-          >
-            <h4>Thay đổi mật khẩu</h4>
-            <div class="form-group">
-              <label>Mật khẩu hiện tại</label>
-              <input
-                type="password"
-                [class.is-invalid]="oldPass.invalid && oldPass.touched"
-                [(ngModel)]="user['pass']"
-                class="form-control"
-                formControlName="oldPass"
-                placeholder="Nhập mật khẩu hiện tại"
-              />
-              <div *ngIf="oldPass.invalid && oldPass.touched" class="mt-2">
-                <small *ngIf="oldPass.errors?.['required']" class="text-danger"
-                  >Mật khẩu không được để trống!
-                </small>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Mật khẩu mới</label>
-              <input
-                type="password"
-                [class.is-invalid]="newPass.invalid && newPass.touched"
-                [(ngModel)]="newPassword"
-                class="form-control"
-                formControlName="newPass"
-                placeholder="Nhập mật khẩu mới"
-              />
-              <div *ngIf="newPass.invalid && newPass.touched" class="mt-2">
-                <small *ngIf="newPass.errors?.['required']" class="text-danger"
-                  >Mật khẩu mới không được để trống!
-                </small>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>Nhập lại mật khẩu</label>
-              <input
-                type="password"
-                [class.is-invalid]="reTypePass.invalid && reTypePass.touched"
-                [(ngModel)]="reTypePassword"
-                class="form-control"
-                formControlName="reTypePass"
-                placeholder="Nhập lại mật khẩu mới"
-              />
-              <div *ngIf="reTypePass.invalid && reTypePass.touched" class="mt-2">
-                <small *ngIf="reTypePass.errors?.['required']" class="text-danger"
-                  >Mật khẩu nhập nhập lại không được để trống!
-                </small>
-              </div>
-              <div *ngIf="resetPasswordForm.errors?.['misMatch']" class="mt-2">
-                <small
-                  class="text-danger"
-                  *ngIf="resetPasswordForm.errors?.['misMatch']"
-                  >Mật khẩu không trùng khớp!</small
-                >
-              </div>
-            </div>
-            <button
-              type="submit"
-              class="btn btn-dark"
-              [disabled]="!resetPasswordForm.valid"
-            >
-              Lưu thay đổi
-            </button>
-          </form>
-          <button class="btn btn-danger mt-3 mb-5" (click)="forgetPassword()">
-            Forget password?
-          </button>
-        </div>
+
+          <router-outlet name="account"></router-outlet>
+ 
       </div>
     </div>
   </section>

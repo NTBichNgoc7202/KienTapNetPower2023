@@ -1,16 +1,21 @@
 import { Component } from '@angular/core';
 import { AdminService } from './service/admin.service';
-import { Router } from '@angular/router';
+import { ChildrenOutletContexts, Router, RouterOutlet } from '@angular/router';
+import { getSliderAnimation } from './app.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [getSliderAnimation()],
 })
 export class AppComponent {
   public isAdmin: boolean = false;
-  constructor(private _adminService: AdminService,
-    private router: Router) {
+  constructor(
+    private _adminService: AdminService,
+    private router: Router,
+    private contexts: ChildrenOutletContexts
+  ) {
     this._adminService.isAdmin.subscribe({
       next: (res) => {
         this.isAdmin = res;
@@ -19,30 +24,40 @@ export class AppComponent {
         console.log(err.message);
       },
     });
-
   }
-  onCustomer(){
+  onCustomer() {
     this.router.navigate(['admin-customer']);
   }
-  onOrder(){
+  onOrder() {
     this.router.navigate(['admin-order']);
   }
-  onProduct(){
+  onProduct() {
     this.router.navigate(['admin']);
   }
-  onDashboard(){
+  onDashboard() {
     this.router.navigate(['admin-dashboard']);
   }
-  onFeedback(){
+  onFeedback() {
     this.router.navigate(['admin-feedback']);
   }
   onSignOut() {
     this._adminService.signOutAdmin().subscribe({
-      next:(data) => {
+      next: (data) => {
         this.isAdmin = false;
-        this.router.navigate(["/"]);
+        this.router.navigate(['/']);
       },
-      error:(err) => console.log(err)
-    })
+      error: (err) => console.log(err),
+    });
+  }
+  prepareRoute(outlet: RouterOutlet) {
+    // return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
+  }
+  getState(outlet: RouterOutlet) {
+    return outlet.activatedRouteData['state'];
   }
 }

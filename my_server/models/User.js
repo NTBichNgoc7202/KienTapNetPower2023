@@ -10,6 +10,7 @@ const User = new Schema(
     unique_id: { type: String },
     image: { type: String },
     salt: { type: String },
+    location: { type: Object },
   },
   { versionKey: false }
 );

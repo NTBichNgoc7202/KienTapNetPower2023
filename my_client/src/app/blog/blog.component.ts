@@ -25,8 +25,7 @@ export class BlogComponent implements OnInit {
     this._service.getBlogList().subscribe(
       {
         next: (data) => {
-          this.blogList = data,
-            console.log(this.blogList)
+          this.blogList = data;
         },
         error: (err) => this.errMess = err.message
       }

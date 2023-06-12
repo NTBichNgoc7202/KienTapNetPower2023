@@ -211,6 +211,34 @@ userRouter.put("/Fgpw", async (req, res) => {
   });
 });
 
+// Get Location
+userRouter.get("/location", async (req, res) => {
+  let phone = req.query.phone;
+  User.findOne({ phone: phone })
+    .then((user) => {
+      res.json(user.location);
+    })
+    .catch((err) => {
+      res.json({ Error: err.message });
+    });
+})
+
+// Update Location
+userRouter.put("/location", async (req, res) => {
+  var userInfo = req.body;
+  User.findOneAndUpdate(
+    { phone: userInfo.phone },
+    { location: userInfo.location },
+    function (err, data) {
+      if (data) {
+        res.json({ message: "success" });
+      } else {
+        res.json({ message: err });
+      }
+    }
+  );
+});
+
 // get user by id
 userRouter.get("/:id", async (req, res) => {
   let o_id = new mongoose.Types.ObjectId.createFromHexString(req.params.id);

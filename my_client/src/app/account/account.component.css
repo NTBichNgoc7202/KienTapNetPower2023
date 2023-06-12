@@ -21,15 +21,6 @@
   border-right: 1px solid whitesmoke;
 }
 
-.tab-content {
-  flex: 1;
-  margin: auto;
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
 .nav-pills a.nav-link {
   padding: 15px 20px;
   border-bottom: 1px solid #ddd;
@@ -71,14 +62,6 @@
   width: 100px;
   border-radius: 100%;
   border: 5px solid #fff;
-}
-
-table{
-  font-size: 12px;
-}
-
-table th{
-  text-align: center;
 }
 
 @media screen {

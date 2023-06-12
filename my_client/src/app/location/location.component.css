@@ -1,0 +1,8 @@
+.tab-content {
+  flex: 1;
+  margin: auto;
+}
+
+button {
+  margin-left: 10px;
+}

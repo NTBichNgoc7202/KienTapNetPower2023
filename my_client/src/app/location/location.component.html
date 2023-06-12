@@ -1,0 +1,49 @@
+<div class="tab-content p-4 p-md-12" id="v-pills-tabContent">
+  <h4>Thay đổi địa chỉ</h4>
+  <form [formGroup]="form" #locationForm="ngForm" (ngSubmit)="changeLocation(locationForm.value)" id="addressForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Province</mat-label>
+      <mat-select [formControl]="province" name="province" [errorStateMatcher]="matcher" [(value)]="provinceSelect">
+        <mat-option *ngFor="let p of provinces" [value]="p">
+          {{ p.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="province.hasError('required')">Please select a province.</mat-error>
+    </mat-form-field>
+    <!-- <button mat-stroked-button class="btn" (click)="province.reset()">
+      Clear
+    </button> -->
+    <p></p>
+    <mat-form-field appearance="fill">
+      <mat-label>District</mat-label>
+      <mat-select [formControl]="district" name="district" [errorStateMatcher]="matcher" [(value)]="districtSelect">
+        <mat-option *ngFor="let d of districts" [value]="d">
+          {{ d.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="district.hasError('required')">Please select a district.</mat-error>
+    </mat-form-field>
+    <!-- <button mat-stroked-button class="btn" (click)="district.reset()">
+      Clear
+    </button> -->
+    <p></p>
+    <mat-form-field appearance="fill">
+      <mat-label>Ward</mat-label>
+      <mat-select [formControl]="ward" name="ward" [errorStateMatcher]="matcher" [(value)]="wardSelect">
+        <mat-option *ngFor="let w of wards" [value]="w">
+          {{ w.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="ward.hasError('required')">Please select a ward.</mat-error>
+    </mat-form-field>
+    <!-- <button mat-stroked-button class="btn" (click)="ward.reset()">
+      Clear
+    </button> -->
+    <!-- <p>Country: {{ country.value | json }}</p> -->
+    <!-- <p>State: {{ state.value | json }}</p> -->
+    <!-- <p>City: {{ city.value | json }}</p> -->
+  </form>
+  <button type="submit" class="btn btn-dark" form="addressForm">
+    Lưu thay đổi
+  </button>
+</div>

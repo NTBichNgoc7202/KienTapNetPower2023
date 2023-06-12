@@ -1,0 +1,38 @@
+<div class="tab-content p-4 p-md-12" id="v-pills-tabContent">
+  <div class="table-striped table-responsive-sm table-responsive-md table-responsive-lq table-responsive-xl">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col" class="align-middle">STT</th>
+          <th class="text-center" scope="col" class="align-middle">
+            Tổng tiền
+          </th>
+          <th class="text-center" scope="col" class="align-middle">
+            Các sản phẩm
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="aligh-middle" *ngFor="let order of orders; let i = index">
+          <th class="align-middle" scope="row">{{ i + 1 }}</th>
+          <td class="align-middle">{{ order.totalPrice }}</td>
+          <td class="align-middle">
+            <div *ngFor="let item of order.products">
+              <div class="row">
+                <div
+                  class="col-3 col-sm-6 col-md-6 col-lg-3 col-xl-3 d-flex align-items-center justify-content-center">
+                  <img class="img-size" [src]="item.image" alt="" />
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-9 col-xl-9">
+                  <strong>{{ item.name }}</strong>
+                  <div>Price: {{ item.price }}</div>
+                  <div>Quantity: {{ item.quantity }}</div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

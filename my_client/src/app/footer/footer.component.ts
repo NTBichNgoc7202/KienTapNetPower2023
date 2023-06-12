@@ -1,5 +1,5 @@
 import { UntypedFormBuilder, NgForm, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import { RegisemailService } from '../service/regisemail.service';
 import { ToastrService } from 'ngx-toastr';
 import { RegisEmail } from '../models/regisEmail';
@@ -12,6 +12,7 @@ import { RegisEmail } from '../models/regisEmail';
 export class FooterComponent implements OnInit {
   public rgeForm: any;
   regisEmail:RegisEmail=new RegisEmail();
+  public angularVersion = `Angular version ${VERSION.full}`
   constructor(private _formBuilder: UntypedFormBuilder,private _service:RegisemailService,private _toast:ToastrService) { }
 
   ngOnInit(): void {

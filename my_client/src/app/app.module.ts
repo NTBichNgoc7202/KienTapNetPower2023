@@ -5,12 +5,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+// Angular Material Modules
 import { MatPaginatorModule } from '@angular/material/paginator';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
-import {MatNativeDateModule} from '@angular/material/core';
-
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DefaultUrlSerializer, UrlSerializer } from '@angular/router';
+// Custome Modules
+// Components
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -29,7 +34,6 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
-import { AccountComponent } from './account/account.component';
 import { StickyNavModule } from 'ng2-sticky-nav';
 import { ContactComponent } from './contact/contact.component';
 import { FavoriteComponent } from './favorite/favorite.component';
@@ -40,6 +44,8 @@ import { AdminCustomerComponent } from './admin-customer/admin-customer.componen
 import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { AdminFeedbackComponent } from './admin-feedback/admin-feedback.component';
 import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-customer.component';
+import { CustomUrlSerializer } from './CustomUrlSerializer';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +65,6 @@ import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-cus
     LoginAdminComponent,
     ProductDetailComponent,
     BlogDetailComponent,
-    AccountComponent,
     ContactComponent,
     FavoriteComponent,
     AdminAddProductComponent,
@@ -69,17 +74,24 @@ import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-cus
     AdminOrderComponent,
     AdminFeedbackComponent,
     AdminEditCustomerComponent,
-
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     CommonModule,
+    MatTableModule,
+    MatButtonModule,
+    MatPaginatorModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    // MatInputModule,
+    // MatDatepickerModule,
+
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
       progressBar: true,
@@ -87,12 +99,11 @@ import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-cus
       preventDuplicates: true,
     }),
     StickyNavModule,
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatNativeDateModule,
+    // Custome Modules
   ],
-  providers: [],
+  providers: [
+    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
