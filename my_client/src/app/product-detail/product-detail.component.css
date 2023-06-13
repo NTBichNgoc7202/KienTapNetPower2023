@@ -57,12 +57,12 @@ Phương Huyềnn
         margin-bottom: 16px;
     }
     .primary-btn{
-      background-color: #cecece;
-      color: black;
+      background-color: #ff90aa;
+      color: #000000b3;
 
     }
     .primary-btn:hover{
-      background-color: black;
+      background-color: #ee2d7a;
       color: white;
 
     }

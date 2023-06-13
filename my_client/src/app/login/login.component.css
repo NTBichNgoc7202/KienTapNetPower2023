@@ -148,10 +148,10 @@ body{
   font-weight: 600;
   color: white;
   text-align: center;
-  text-shadow: 2px 2px #333;
+  text-shadow: 2px 2px #ee2d7a;
 }
 .cover .text .text-2{
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
 }
 .container .forms{
@@ -240,19 +240,19 @@ body{
 }
 .forms .form-content .button input{
   color: #fff;
-  background: #1B262C;
+  background: #ee2d7a;
   border-radius: 6px;
   padding: 0;
   cursor: pointer;
   transition: all 0.4s ease;
 }
 .forms .form-content .button input:hover{
-  background: rgb(78, 78, 78);
+  background: #ff90aa;
   
 }
 /* chữ đăng ký */
 .forms .form-content label{
-  color: #1597BB;
+  color: #ff90aa;
   cursor: pointer;
 }
 .forms .form-content label:hover{
@@ -273,7 +273,7 @@ body{
   display: none;
 }
 a{
-    color: #1597bb !important;
+    color: #ff90aa !important;
 }
 @media (max-width: 730px) {
   .container .cover{
