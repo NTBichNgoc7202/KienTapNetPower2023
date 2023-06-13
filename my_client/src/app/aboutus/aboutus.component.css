@@ -19,7 +19,9 @@ Section 1 Begin
   padding: 5px 15px 15px;
   text-align: justify;
 }
-
+.about__item h4{
+  text-align: center;
+}
 
 /*---------------------
 Section 2 Begin

@@ -3,7 +3,7 @@
 -----------------------*/
 
 .breadcrumb-option {
-    background: #f3f2ee;
+    background: #fbd2d86f;
     padding: 40px 0;
 }
 
@@ -30,7 +30,7 @@
 
 .breadcrumb__links span {
     font-size: 15px;
-    color: #b7b7b7;
+    color: #F06882;
     display: inline-block;
 }
 
@@ -138,6 +138,7 @@
 
 .continue__btn.remove__btn {
     text-align: right;
+
 }
 
 
@@ -148,7 +149,7 @@
 
 .continue__btn a {
     color: #ffffff;
-    background: #111111;
+    background: #FF90AA;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -157,6 +158,12 @@
     padding: 14px 35px;
     display: inline-block;
     text-decoration: none;
+}
+
+.continue__btn a:hover {
+
+  background: #EE2D7A;
+
 }
 
 .cart__discount {
@@ -219,7 +226,8 @@
 }
 
 .cart__total {
-    background: #f3f2ee;
+    background: #fbd2d848;
+    ;
     padding: 35px 40px 40px;
 }
 
@@ -252,7 +260,16 @@
     padding: 12px 10px;
     text-align: center;
     letter-spacing: 2px;
+    background-color: #FF90AA;
+    border: 1px solid #FF90AA;
 }
+
+.cart__total .primary-btn:hover {
+
+  background-color: #EE2D7A;
+
+}
+
 
 .center {
     position: relative;
