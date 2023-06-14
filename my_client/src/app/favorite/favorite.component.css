@@ -3,9 +3,10 @@
 -----------------------*/
 
 .breadcrumb-option {
-  background: #f3f2ee;
+  background-color: #fbd2d86f;
   padding: 40px 0;
 }
+
 
 .breadcrumb__text h4 {
   color: #111111;
@@ -148,7 +149,7 @@ Shopping favorite
 
 .continue__btn a {
   color: #ffffff;
-  background: #111111;
+  background: #EE2D7A;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 2px;
@@ -157,6 +158,11 @@ Shopping favorite
   padding: 14px 35px;
   display: inline-block;
   text-decoration: none;
+}
+.continue__btn a:hover {
+
+  background: #FF90AA;
+
 }
 
 .favorite__discount {

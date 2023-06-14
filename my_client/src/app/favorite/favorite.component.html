@@ -82,14 +82,14 @@
   <ng-container *ngIf="favorite.length == 0">
     <div class="container">
       <div class="text-center card mx-auto d-block">
-        <i class="bi bi-search-heart fa-10x"></i>
+        <i class="bi bi-search-heart fa-10x" ></i>
         <h5><strong>Danh mục yêu thích của bạn đang trống</strong></h5>
         <p>Hãy thêm sản phẩm yêu thích vào đây</p>
         <button
           class="continue__btn"
           routerLink="/home-page"
           routerLinkActive="active"
-          class="primary-btn"
+          class="primary-btn" style="background: #ee2d7a; border: 1px solid #ee2d7a;"
         >
           Mua sắm ngay
         </button>

@@ -46,10 +46,11 @@ body{
   width: calc(100%);
 }
 .forms .form-content .title{
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 20px;
   position: relative;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 550;
   color: #333;
 }
 .forms .form-content .title:before{
@@ -88,7 +89,7 @@ body{
 }
 .form-content .input-box input:focus,
 .form-content .input-box input:valid{
-  border-color: black;
+  border-color: #FF90AA;
 }
 .form-content .input-box i{
   position: absolute;
@@ -111,7 +112,7 @@ body{
 }
 .forms .form-content .button input{
   color: #fff;
-  background: #1B262C;
+  background: #ee2d7a;
   border-radius: 6px;
   padding: 0;
   cursor: pointer;
@@ -119,7 +120,7 @@ body{
 
 }
 .forms .form-content .button input:hover{
-  background: white;
+  background: #FF90AA;
 }
 /* chữ đăng ký */
 .forms .form-content label{
@@ -149,13 +150,14 @@ a {
 
 .logadmin {
   float: left;
+  font-family: Arial, Helvetica, sans-serif;
   color: black!important;
   text-decoration: none;
   font-size: 14px;
 }
 
 .logadmin:hover {
-  font-weight: bold;
+  font-weight: 500;
   font-size: 15px;
 }
 

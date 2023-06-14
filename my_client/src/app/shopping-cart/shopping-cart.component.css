@@ -149,7 +149,7 @@
 
 .continue__btn a {
     color: #ffffff;
-    background: #FF90AA;
+    background: #EE2D7A;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -159,10 +159,12 @@
     display: inline-block;
     text-decoration: none;
 }
-
+.buying__btn:hover {
+  background: #FF90AA;
+}
 .continue__btn a:hover {
 
-  background: #EE2D7A;
+  background: #FF90AA;
 
 }
 
@@ -260,13 +262,13 @@
     padding: 12px 10px;
     text-align: center;
     letter-spacing: 2px;
-    background-color: #FF90AA;
-    border: 1px solid #FF90AA;
+    background-color: #EE2D7A;
+    border: 1px solid #EE2D7A;
 }
 
 .cart__total .primary-btn:hover {
 
-  background-color: #EE2D7A;
+  background-color: #FF90AA;
 
 }
 

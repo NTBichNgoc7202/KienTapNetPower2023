@@ -1,56 +1,5 @@
-/* .box {
-    border: 0.5px solid rgba(131, 121, 121, 0.5);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-}
 
-.container {
-    font-size: 14px;
-}
 
-#form-container-login {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.item {
-    float: right;
-    text-decoration: none;
-}
-
-.item:hover {
-    color: rgba(0, 0, 0, 0.5);
-}
-
-.lg {
-    width: 35%;
-}
-
-.regis {
-    float: left;
-    padding-bottom: 30px;
-}
-
-.logadmin {
-    float: right;
-    padding-bottom: 30px;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-@media(max-width:767px) {
-    .lg1 {
-        width: 45%;
-    }
-}
-
-@media(max-width:280px) {
-    .lg1 {
-        width: 55%;
-    }
-} */
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200%3B300%3B400%3B500%3B600%3B700&display=swap');
 *{
@@ -171,7 +120,8 @@ body{
 .forms .form-content .title{
   position: relative;
   font-size: 24px;
-  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 550;
   color: #333;
 }
 .forms .form-content .title:before{
@@ -210,7 +160,7 @@ body{
 }
 .form-content .input-box input:focus,
 .form-content .input-box input:valid{
-  border-color: black;
+  border-color: #FF90AA;
 }
 .form-content .input-box i{
   position: absolute;
@@ -248,7 +198,7 @@ body{
 }
 .forms .form-content .button input:hover{
   background: #ff90aa;
-  
+
 }
 /* chữ đăng ký */
 .forms .form-content label{
@@ -322,15 +272,17 @@ button:hover {
 }
 
 .logadmin {
+
   float: right;
+  font-family: Arial, Helvetica, sans-serif;
   color: black!important;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .logadmin:hover {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 16px;
 
 }
 
@@ -358,58 +310,3 @@ button:hover {
   }
 }
 
-
-
-/* .box {
-    border: 0.5px solid rgba(131, 121, 121, 0.5);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
-}
-
-.container {
-    font-size: 14px;
-}
-
-#form-container-login {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.item {
-    float: right;
-    text-decoration: none;
-}
-
-.item:hover {
-    color: rgba(0, 0, 0, 0.5);
-}
-
-.lg {
-    width: 35%;
-}
-
-.regis {
-    float: left;
-    padding-bottom: 30px;
-}
-
-.logadmin {
-    float: right;
-    padding-bottom: 30px;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
-@media(max-width:767px) {
-    .lg1 {
-        width: 45%;
-    }
-}
-
-@media(max-width:280px) {
-    .lg1 {
-        width: 55%;
-    }
-} */

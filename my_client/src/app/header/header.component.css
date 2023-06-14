@@ -104,7 +104,6 @@ NavBar PC
     transform: scale(1.03);
     color: black;
 }
-
 .nav-mobile-logo,
 .nav-mobile-icon {
     display: none;
@@ -141,7 +140,7 @@ NavBar PC
 }
 
 .dropdown-content a li:hover {
-    background-color: #f1f1f1;
+    background-color: #fbd2d86f;
     font-weight: 700;
     transform: scale(1.005);
 }
