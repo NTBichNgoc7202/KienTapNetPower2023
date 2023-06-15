@@ -20,7 +20,7 @@
     <!-- right -->
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
       <div class="header--right">
-        <a routerLink="/favorite" routerLinkActive="active"
+        <a (click)="gotoFavorite()"
           ><i class="fa-solid bi bi-suit-heart-fill" aria-hidden="true"></i>
           <div class="badge bg-danger">{{ totalFavorite }}</div>
         </a>
@@ -85,7 +85,7 @@
           </a>
           <div class="nav-mobile-end">
             <div class="nav-mobile-icon">
-              <a routerLink="/favorite" routerLinkActive="active"
+              <a (click)="gotoFavorite()"
                 ><i
                   class="fa-solid bi bi-suit-heart-fill"
                   aria-hidden="true"

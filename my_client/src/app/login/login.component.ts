@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
           this._shoppingCart.setTotalItems();
           this._favorite.setTotalFavorites();
           this.router.navigate(['account', resData.user.phone]);
-        }, 0);
+          // this.router.navigate(['home-page']);
+        }, 500);
       }
       if (resData.message === 'unsuccess') {
         this._toast.error('Sai mật khẩu!', 'ĐĂNG NHẬP');

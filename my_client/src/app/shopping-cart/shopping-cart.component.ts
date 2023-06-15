@@ -1,14 +1,11 @@
 import {
   Component,
   ViewChildren,
-  OnInit,
   AfterViewInit,
   QueryList,
-  AfterContentInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Cart } from '../models/cart';
 import { Product } from '../models/products';
 import { ShoppingCartService } from '../service/shopping-cart.service';
 import { UntypedFormBuilder, Validators, NgForm } from '@angular/forms';

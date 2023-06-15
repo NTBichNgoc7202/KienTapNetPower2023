@@ -13,7 +13,8 @@ import {
   throwError,
 } from 'rxjs';
 import { IAdmin } from '../interface/admin';
-const baseUrl = 'http://localhost:3000';
+import { baseUrl, proxyCase } from './server-url';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -22,22 +23,29 @@ export class AdminService {
     false
   );
   constructor(private _http: HttpClient) {}
+  options = {
+    withCredentials: true,
+  };
   getAdmin(): Observable<IAdmin[]> {
     return this._http
-      .get<IAdmin[]>(`${baseUrl}/admin`)
+      .get<IAdmin[]>(`${baseUrl}/admin`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   logAdmin(data: Admin) {
-    return this._http.post(`/login-admin`, data);
+    return this._http.post(`${baseUrl}/login-admin`, data, this.options);
   }
   signOutAdmin(): Observable<any> {
     return this._http
-      .post(`/signout-admin`, {})
+      .post(`${baseUrl}/signout-admin`, {}, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   checkIsAdmin() {
     return this._http
-      .get(`/check-admin`, { responseType: 'text' })
+      .get(`${baseUrl}/check-admin`, {
+        responseType: 'text',
+        withCredentials: true,
+        observe: 'response',
+      })
       .pipe(retry(3), catchError(this.handleError));
   }
   public setAdmin() {

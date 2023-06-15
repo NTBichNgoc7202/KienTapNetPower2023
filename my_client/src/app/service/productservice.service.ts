@@ -8,29 +8,30 @@ import { catchError, Observable, retry, throwError, map } from 'rxjs';
 import { IProduct } from '../interface/productList';
 import { Product } from '../models/products';
 import { ICategory } from '../interface/category';
-
-const baseUrl = 'http://localhost:3000';
+import { baseUrl, proxyCase } from './server-url';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductserviceService {
   constructor(private _http: HttpClient) {}
-
-  url_category = 'http://localhost:3000/products/category/';
+  options = {
+    withCredentials: true,
+  };
+  url_category = `${baseUrl}/products/category/`;
 
   getProductList(): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${baseUrl}/products`)
+      .get<IProduct[]>(`${baseUrl}/products`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getProductListByCategory(id: any): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${this.url_category}${id}`)
+      .get<IProduct[]>(`${this.url_category}${id}`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getProductListByTag(tag: any): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${baseUrl}/products/tag/${tag}`)
+      .get<IProduct[]>(`${baseUrl}/products/tag/${tag}`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -42,11 +43,15 @@ export class ProductserviceService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     return this._http
       .post(`${baseUrl}/products`, JSON.stringify(p), requestOptions)
-      .pipe(map((res) => res as any),
-        retry(3), catchError(this.handleError));
+      .pipe(
+        map((res) => res as any),
+        retry(3),
+        catchError(this.handleError)
+      );
   }
 
   updateProduct(p: any): Observable<any> {
@@ -57,6 +62,7 @@ export class ProductserviceService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     return this._http
       .put(`${baseUrl}/products/`, JSON.stringify(p), requestOptions)
@@ -71,6 +77,7 @@ export class ProductserviceService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     let tempRequestOptions: any = requestOptions;
     tempRequestOptions['body'] = { _id: id };
@@ -81,18 +88,20 @@ export class ProductserviceService {
 
   getCategoryList(): Observable<ICategory[]> {
     return this._http
-      .get<ICategory[]>(`${baseUrl}/products/categories`)
+      .get<ICategory[]>(`${baseUrl}/products/categories`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
 
   getProductInfo(id: any): Observable<any> {
-    return this._http.get<Product>(`${baseUrl}/products/${id}`).pipe(
-      map((res) => {
-        return res as Product;
-      }),
-      retry(2),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<Product>(`${baseUrl}/products/${id}`, this.options)
+      .pipe(
+        map((res) => {
+          return res as Product;
+        }),
+        retry(2),
+        catchError(this.handleError)
+      );
   }
   handleError(err: HttpErrorResponse) {
     return throwError(() => new Error(err.message));

@@ -29,10 +29,7 @@ router.post("/login-admin", (req, res) => {
       .toString(`hex`);
     if (data.pass == hash) {
       req.session.isAdmin = true;
-      req.session.save((err) => {
-        if (err) return next(err);
-        return res.send({ message: "success" });
-      });
+      res.send({ message: "success" });
     } else {
       res.json({ message: "unsuccess" });
     }
@@ -41,7 +38,6 @@ router.post("/login-admin", (req, res) => {
 
 router.post("/signout-admin", (req, res) => {
   req.session.isAdmin = undefined;
-  req.session.save();
   res.send(req.session);
 });
 
@@ -52,6 +48,15 @@ router.get("/check-admin", (req, res) => {
   } else {
     res.send("Authorized").status(200);
   }
+});
+
+router.get("", (req, res) => {
+  res.status(200).send("Hello from glowy");
+});
+
+router.get("/session", (req, res) => {
+  req.session.test = "test";
+  res.send(req.session);
 });
 
 module.exports = router;

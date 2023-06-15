@@ -1,15 +1,11 @@
 import {
   Component,
   ViewChildren,
-  OnInit,
-  AfterViewInit,
   QueryList,
-  AfterContentInit,
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Favorite } from '../models/favorite';
-import { Product } from '../models/products';
 import { FavoriteService } from '../service/favorite.service';
 
 @Component({
@@ -17,7 +13,7 @@ import { FavoriteService } from '../service/favorite.service';
   templateUrl: './favorite.component.html',
   styleUrls: ['./favorite.component.css']
 })
-export class FavoriteComponent implements AfterViewInit {
+export class FavoriteComponent implements OnInit  {
   @ViewChildren('singleprice') component!: QueryList<HTMLSpanElement>;
   favorite: any = [];
   errMess: string = '';
@@ -29,19 +25,7 @@ export class FavoriteComponent implements AfterViewInit {
   ) {
     this.getFavorites();
   }
-  ngAfterViewInit() {
-    this?.component?.changes.subscribe((c) => {
-      c.toArray().forEach((item: any) => {
-        setTimeout(() => {
-          this.grandTotal += Number(
-            item.nativeElement.innerText
-              .replace(/[^0-9.]/g, '')
-              .replace(/(\.\d+)+/, '')
-          );
-        }, 0);
-      });
-    });
-  }
+  ngOnInit(): void {}
 
   getFavorites() {
     this._service.getFavorite().subscribe({

@@ -235,7 +235,7 @@ export class ProductsComponent implements OnInit {
   }
   showAll() {
     this.productList = this.originalProductList;
-    this.length = this.productList.length;
+    this.length = this.productList?.length;
     this.paginator.firstPage();
   }
   sortByTags(tag: string) {

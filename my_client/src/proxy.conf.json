@@ -1,38 +1,11 @@
 [
   {
-    "context": ["/userLogin"],
-    "target": "http://127.0.0.1:3000/users/login",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": { "^/userLogin": "" }
-  },
-  {
-    "context": ["/loginCookie"],
-    "target": "http://127.0.0.1:3000/users/loginCookie",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "headers": {
-      "Connection": "keep-alive"
-    },
-    "pathRewrite": { "^/loginCookie": "" }
-  },
-  {
     "context": ["/login-admin"],
     "target": "http://127.0.0.1:3000/login-admin",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
     "pathRewrite": { "^/login-admin": "" }
-  },
-  {
-    "context": ["/check-admin"],
-    "target": "http://127.0.0.1:3000/check-admin",
-    "secure": false,
-    "changeOrigin": true,
-    "logLevel": "debug",
-    "pathRewrite": { "^/check-admin": "" }
   },
   {
     "context": ["/signout-admin"],
@@ -43,21 +16,49 @@
     "pathRewrite": { "^/signout-admin": "" }
   },
   {
-    "context": ["/isLoggedIn"],
-    "target": "http://127.0.0.1:3000/users/isLoggedIn",
+    "context": ["/check-admin"],
+    "target": "http://127.0.0.1:3000/check-admin",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
-    "pathRewrite": { "^/isLoggedIn": "" }
+    "pathRewrite": { "^/check-admin": "" }
   },
   {
-    "context": ["/logout"],
+    "context": ["/users/login"],
+    "target": "http://127.0.0.1:3000/users/login",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/users/login": "" }
+  },
+  {
+    "context": ["/users/logout"],
     "target": "http://127.0.0.1:3000/users/logout",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug",
-    "pathRewrite": { "^/logout": "" }
+    "pathRewrite": { "^/users/logout": "" }
   },
+  {
+    "context": ["/users/cookieLogin"],
+    "target": "http://127.0.0.1:3000/users/cookieLogin",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "Connection": "keep-alive"
+    },
+    "pathRewrite": { "^/users/cookieLogin": "" }
+  },
+  {
+    "context": ["/users/isLoggedIn"],
+    "target": "http://127.0.0.1:3000/users/isLoggedIn",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": { "^/users/isLoggedIn": "" }
+  },
+
   {
     "context": ["/carts"],
     "target": "http://127.0.0.1:3000/carts",

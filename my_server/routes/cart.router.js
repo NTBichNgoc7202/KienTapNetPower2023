@@ -51,11 +51,9 @@ cartRouter.post("", async (req, res) => {
   );
   if (index != -1) {
     req.session.guestCart[index].quantity += req.body.quantity;
-    req.session.save();
     return res.json({ message: "success" });
   } else {
     await req.session.guestCart.push(req.body);
-    req.session.save();
     return res.json({ message: "success" });
   }
 });
@@ -85,9 +83,10 @@ cartRouter.get("/count", async (req, res) => {
     });
   } else {
     if (req.session.guestCart == undefined) {
-      req.session.guestCart = [];
+      res.json([].length);
+    } else {
+      res.json(req.session.guestCart.length);
     }
-    res.json(req.session.guestCart.length);
   }
 });
 
@@ -117,7 +116,6 @@ cartRouter.put("/product/quantity", async (req, res) => {
   );
   if (index != -1) {
     req.session.guestCart[index].quantity = req.body.quantity;
-    req.session.save();
     return res.json({ message: "success" });
   }
 });
@@ -148,7 +146,6 @@ cartRouter.delete("", async (req, res) => {
     );
     if (index != -1) {
       req.session.guestCart.splice(index, 1);
-      req.session.save();
       res.json({ message: "success" });
     }
   }
@@ -169,7 +166,6 @@ cartRouter.patch("", async (req, res) => {
     res.json({ message: "success" });
   } else {
     req.session.guestCart = [];
-    req.session.save();
     res.json({ message: "success" });
   }
 });

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ueldaily-hubing": {
+      "hosting": {
+        "my_client": [
+          "glowy"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ueldaily-hubing"
+  }
+}

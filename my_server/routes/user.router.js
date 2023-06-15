@@ -37,7 +37,6 @@ userRouter.get("/phone/:phone", async (req, res) => {
 //   console.log(salt);
 // console.log(hash);
 
-
 userRouter.put("", async (req, res) => {
   User.findByIdAndUpdate(req.body._id, {
     $set: {
@@ -57,13 +56,13 @@ userRouter.put("", async (req, res) => {
 // Check if user is logged in
 userRouter.get("/isLoggedIn", async (req, res) => {
   if (req.session.unique_id == undefined) {
-    res.json({ message: "Unauthorized" }).status(401);
+    res.json({ message: "Unauthorized" }).status(205);
   } else {
     User.findOne({ unique_id: req.session.unique_id }).then((data, err) => {
       if (data) {
         res.json({ message: "Authorized", user: data });
       } else {
-        res.json({ message: "Unauthorized" }).status(401);
+        res.json({ message: "Unauthorized" }).status(205);
       }
     });
   }
@@ -72,7 +71,6 @@ userRouter.get("/isLoggedIn", async (req, res) => {
 // Logout user
 userRouter.post("/logout", async (req, res) => {
   req.session.unique_id = undefined;
-  req.session.save();
   res.send(req.session);
 });
 
@@ -104,7 +102,7 @@ userRouter.post("/regis", async (req, res) => {
     }
   });
 });
-userRouter.get("/loginCookie", (req, res) => {
+userRouter.get("/cookieLogin", (req, res) => {
   if (req.cookies.userPhone != undefined && req.cookies.userPass != undefined) {
     // if cookie exists
     let phone = req.cookies.userPhone;
@@ -117,9 +115,8 @@ userRouter.get("/loginCookie", (req, res) => {
 
 // login user
 userRouter.post("/login", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4300");
-  res.setHeader("Access-Control-Allow-Credentials", true);
-
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:4300");
+  // res.setHeader("Access-Control-Allow-Credentials", true);
   var userInfo = req.body;
   User.findOne({ phone: userInfo.phone }).then((data, err) => {
     if (data) {
@@ -136,14 +133,17 @@ userRouter.post("/login", (req, res) => {
           res.cookie("userPhone", userInfo.phone, {
             maxAge: 900000,
             httpOnly: false,
+            sameSite: "none",
+            secure:true
           });
           res.cookie("userPass", userInfo.pass, {
             maxAge: 900000,
             httpOnly: false,
+            sameSite: "none",
+            secure:true
           });
         }
         req.session.unique_id = data.unique_id;
-        req.session.save();
         res.json({ message: "success", user: data });
       } else {
         res.json({ message: "unsuccess" });
@@ -221,7 +221,7 @@ userRouter.get("/location", async (req, res) => {
     .catch((err) => {
       res.json({ Error: err.message });
     });
-})
+});
 
 // Update Location
 userRouter.put("/location", async (req, res) => {
@@ -240,7 +240,7 @@ userRouter.put("/location", async (req, res) => {
 });
 
 // get user by id
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/id/:id", async (req, res) => {
   let o_id = new mongoose.Types.ObjectId.createFromHexString(req.params.id);
   User.findById(o_id)
     .then((user) => {

@@ -44,7 +44,7 @@ export class AdminComponent implements OnInit {
   ) {
     this._adminService.checkIsAdmin().subscribe({
       next: (res: any) => {
-        if (res === 'Authorized') {
+        if (res.body === 'Authorized') {
           this.getProducts();
           this._adminService.setAdmin();
           return;

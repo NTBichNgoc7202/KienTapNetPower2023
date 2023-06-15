@@ -41,11 +41,9 @@ favoriteRouter.post("", async (req, res) => {
   );
   if (index != -1) {
     req.session.guestFavorite[index].quantity += req.body.quantity;
-    req.session.save();
     res.json({ message: "success" });
   } else {
     await req.session.guestFavorite.push(req.body);
-    req.session.save();
     res.json({ message: "success" });
   }
 });
@@ -75,9 +73,10 @@ favoriteRouter.get("/count", async (req, res) => {
     });
   } else {
     if (req.session.guestFavorite == undefined) {
-      req.session.guestFavorite = [];
+      res.json([].length);
+    } else {
+      res.json(req.session.guestFavorite.length);
     }
-    res.json(req.session.guestFavorite.length);
   }
 });
 
@@ -107,7 +106,6 @@ favoriteRouter.delete("", async (req, res) => {
     );
     if (index != -1) {
       req.session.guestFavorite.splice(index, 1);
-      req.session.save();
       res.json({ message: "success" });
     }
   }
@@ -128,12 +126,10 @@ favoriteRouter.patch("", async (req, res) => {
     res.json({ message: "success" });
   } else {
     req.session.guestFavorite = [];
-    req.session.save();
     res.json({ message: "success" });
   }
 });
 module.exports = favoriteRouter;
-
 
 /*
 //get favorite
@@ -194,4 +190,3 @@ favoriteRouter.patch("", async (req, res) => {
   });
 });
 */
-

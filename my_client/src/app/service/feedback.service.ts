@@ -1,24 +1,26 @@
-import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, retry, throwError,map } from 'rxjs';
+import { catchError, Observable, retry, throwError, map } from 'rxjs';
 import { Feedback } from '../models/feedback';
 import { IFeedback } from './../interface/feedback';
+import { baseUrl, proxyCase } from './server-url';
 
-
-
-const baseUrl ="http://localhost:3000"
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FeedbackService {
-
-  constructor(private _http: HttpClient) {
-   }
-   getFeedback():Observable<IFeedback[]> {
-    return this._http.get<IFeedback[]>(`${baseUrl}/feedback`).pipe(
-      retry(3),
-     catchError(this.handleError)
-    )
+  constructor(private _http: HttpClient) {}
+  options = {
+    withCredentials: true,
+  };
+  getFeedback(): Observable<IFeedback[]> {
+    return this._http
+      .get<IFeedback[]>(`${baseUrl}/feedback`, this.options)
+      .pipe(retry(3), catchError(this.handleError));
   }
 
   deleteFeedback(id: string): Observable<any> {
@@ -29,6 +31,7 @@ export class FeedbackService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     let tempRequestOptions: any = requestOptions;
     tempRequestOptions['body'] = { _id: id };
@@ -37,10 +40,10 @@ export class FeedbackService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
-  postFeedback(data:Feedback){
-    return this._http.post(`${baseUrl}/feedback`,data)
+  postFeedback(data: Feedback) {
+    return this._http.post(`${baseUrl}/feedback`, data, this.options);
   }
-   handleError(err:HttpErrorResponse){
-   return throwError(()=>new Error(err.message))
- }
+  handleError(err: HttpErrorResponse) {
+    return throwError(() => new Error(err.message));
+  }
 }

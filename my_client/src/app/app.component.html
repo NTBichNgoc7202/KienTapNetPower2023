@@ -39,13 +39,17 @@
         </ul>
         <hr />
         <div class="dropdown pb-4">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <!-- <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle" /> -->
-            <li><a class="dropdown-item d-none d-sm-inline mx-1" (click)="onSignOut()">Sign out</a></li>
-
+            <img src="https://lh3.googleusercontent.com/a-/AD_cMMTO5FeGRjov13aJ-eFah25jGm4lEfwfo6lzVM6MYhQ=s800-p" alt="hugenerd" width="30" height="30" class="rounded-circle" />
+            Click to show more
           </a>
-
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" (click)="onSignOut()">Sign out</button>
+            <button class="dropdown-item">Action</button>
+            <button class="dropdown-item">Another action</button>
+            <button class="dropdown-item">Something else here</button>
+          </div>
         </div>
       </div>
     </div>

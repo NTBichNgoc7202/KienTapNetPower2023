@@ -1,6 +1,6 @@
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -45,6 +45,7 @@ import { AdminOrderComponent } from './admin-order/admin-order.component';
 import { AdminFeedbackComponent } from './admin-feedback/admin-feedback.component';
 import { AdminEditCustomerComponent } from './admin-edit-customer/admin-edit-customer.component';
 import { CustomUrlSerializer } from './CustomUrlSerializer';
+import { CustomHttpInterceptor } from './CustomHttpInterceptor';
 
 
 @NgModule({
@@ -80,6 +81,10 @@ import { CustomUrlSerializer } from './CustomUrlSerializer';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'XSRF-TOKEN',
+      headerName: 'X-XSRF-TOKEN',
+    }),
     FormsModule,
     CommonModule,
     MatTableModule,
@@ -102,7 +107,8 @@ import { CustomUrlSerializer } from './CustomUrlSerializer';
     // Custome Modules
   ],
   providers: [
-    { provide: UrlSerializer, useClass: CustomUrlSerializer }
+    { provide: UrlSerializer, useClass: CustomUrlSerializer },
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

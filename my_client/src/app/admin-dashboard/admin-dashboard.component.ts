@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css']
+  styleUrls: ['./admin-dashboard.component.css'],
 })
 export class AdminDashboardComponent {
   constructor(
@@ -17,7 +17,7 @@ export class AdminDashboardComponent {
   ) {
     this._adminService.checkIsAdmin().subscribe({
       next: (res: any) => {
-        if (res === 'Authorized') {
+        if (res.body === 'Authorized') {
           // this.getOrders();
           this._adminService.setAdmin();
           return;

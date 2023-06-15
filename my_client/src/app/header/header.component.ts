@@ -49,10 +49,10 @@ export class HeaderComponent {
   }
   goToCategory(id: any) {
     this.router.navigate(['products', id]);
-  }
+  };
   goToProduct() {
     this.router.navigate(['products']);
-  }
+  };
   goToAccount() {
     this._userService.checkIsLoggedIn().subscribe({
       next: (res) => {
@@ -64,7 +64,12 @@ export class HeaderComponent {
       },
       error: (err) => {
         console.log(err.message);
+        this.router.navigate(['login']);
       },
     });
+  };
+  // <a routerLink="/favorite" routerLinkActive="active"></a>
+  gotoFavorite() {
+    this.router.navigate(['love']);
   }
 }

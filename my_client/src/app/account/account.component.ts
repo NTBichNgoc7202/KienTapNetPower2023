@@ -66,7 +66,7 @@ export class AccountComponent implements OnInit {
     this._userService.getUserByPhone(phone).subscribe({
       next: (data) => {
         this.userInfo = data;
-        // this.onChangeProfileClick()
+        this.onChangeProfileClick()
       },
       error: (err) => console.log(err),
     });

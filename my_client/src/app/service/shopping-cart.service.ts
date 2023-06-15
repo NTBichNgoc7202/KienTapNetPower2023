@@ -11,22 +11,22 @@ import { Product } from '../models/products';
 import { Cart } from '../models/cart';
 import { ICategory } from '../interface/category';
 import { ICart } from '../interface/cart';
-
-const baseUrl = 'http://localhost:3000';
+import { baseUrl, proxyCase } from './server-url';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ShoppingCartService {
-  private readonly api_url = 'http://localhost:3000';
 
   public totalItem: BehaviorSubject<number> = new BehaviorSubject<number>(0);;
 
   constructor(private _http: HttpClient) {}
-
+  options = {
+    withCredentials: true,
+  };
   getCart(): Observable<ICart[]> {
     return this._http
-      .get<ICart[]>(`/carts`)
+      .get<ICart[]>(`${baseUrl}/carts`,this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   changeProductQuantity(p: any) {
@@ -37,10 +37,11 @@ export class ShoppingCartService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     return this._http
       .put(
-        `/carts/product/quantity`,
+        `${baseUrl}/carts/product/quantity`,
         {
           _id: p._id,
           quantity: p.quantity,
@@ -58,9 +59,10 @@ export class ShoppingCartService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     return this._http
-      .post(`/carts`, JSON.stringify(p), requestOptions)
+      .post(`${baseUrl}/carts`, JSON.stringify(p), requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -79,9 +81,10 @@ export class ShoppingCartService {
       body: {
         _id: id,
       },
+      withCredentials: true,
     };
     return this._http
-      .delete(`/carts`, requestOptions)
+      .delete(`${baseUrl}/carts`, requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -93,14 +96,15 @@ export class ShoppingCartService {
     const requestOptions: Object = {
       headers: headers,
       responseType: 'text',
+      withCredentials: true,
     };
     return this._http
-      .patch(`/carts`, requestOptions)
+      .patch(`${baseUrl}/carts`, requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
   public getProductCount() {
     return this._http
-      .get(`/carts/count`)
+      .get(`${baseUrl}/carts/count`,this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   public setTotalItems() {

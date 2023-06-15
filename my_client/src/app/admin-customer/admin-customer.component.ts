@@ -16,7 +16,6 @@ export class AdminCustomerComponent {
   user: any = [];
   customerList: any;
   constructor(
-
     private customerService: UserserviceService,
     private _adminService: AdminService,
     private _toast: ToastrService,
@@ -24,7 +23,7 @@ export class AdminCustomerComponent {
   ) {
     this._adminService.checkIsAdmin().subscribe({
       next: (res: any) => {
-        if (res === 'Authorized') {
+        if (res.body === 'Authorized') {
           this.getCustomers();
           this._adminService.setAdmin();
           return;
@@ -104,7 +103,6 @@ export class AdminCustomerComponent {
     }
     this.user = new User();
   }
-
 
   onEdit(id: any) {
     this.router.navigate(['editUser', id]);

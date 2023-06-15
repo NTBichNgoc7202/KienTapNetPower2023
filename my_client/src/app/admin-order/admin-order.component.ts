@@ -21,7 +21,7 @@ export class AdminOrderComponent {
   ) {
     this._adminService.checkIsAdmin().subscribe({
       next: (res: any) => {
-        if (res === 'Authorized') {
+        if (res.body === 'Authorized') {
           this.getOrders();
           this._adminService.setAdmin();
           return;
@@ -61,5 +61,4 @@ export class AdminOrderComponent {
       });
     }
   }
-
 }

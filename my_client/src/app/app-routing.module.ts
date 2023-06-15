@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'regis', component: RegisComponent },
   { path: 'forgotpw', component: ForgotpwComponent },
-  { path: 'favorite', component: FavoriteComponent },
+  { path: 'love', component: FavoriteComponent },
   { path: 'addProduct', component: AdminAddProductComponent },
   { path: 'editProduct/:id', component: AdminEditProductComponent },
   { path: 'login-as-admin', component: LoginAdminComponent },

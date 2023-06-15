@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-admin-feedback',
   templateUrl: './admin-feedback.component.html',
-  styleUrls: ['./admin-feedback.component.css']
+  styleUrls: ['./admin-feedback.component.css'],
 })
 export class AdminFeedbackComponent {
   feedbacks: any = [];
@@ -22,7 +22,7 @@ export class AdminFeedbackComponent {
   ) {
     this._adminService.checkIsAdmin().subscribe({
       next: (res: any) => {
-        if (res === 'Authorized') {
+        if (res.body === 'Authorized') {
           this.getFeedbacks();
           this._adminService.setAdmin();
           return;
@@ -64,5 +64,4 @@ export class AdminFeedbackComponent {
       });
     }
   }
-
 }
