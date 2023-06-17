@@ -3,28 +3,38 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { IBlog } from '../interface/blog';
 import { Blog } from '../models/blog';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
   getBlogList(): Observable<IBlog[]> {
     return this._http
-      .get<IBlog[]>(`${baseUrl}/blogs`, this.options)
+      .get<IBlog[]>(`${this.baseUrl}/blogs`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
 
   postBlog(data: Blog) {
-    return this._http.post(`${baseUrl}/blog`, data, this.options);
+    return this._http.post(`${this.baseUrl}/blog`, data, this.options);
   }
 
   updateBlog(id: any, data: any) {
-    return this._http.patch(`${baseUrl}/${id}`, data, this.options);
+    return this._http.patch(`${this.baseUrl}/${id}`, data, this.options);
   }
 
   handleError(err: HttpErrorResponse) {
@@ -32,12 +42,12 @@ export class BlogService {
   }
 
   deleteBlog(id: string) {
-    return this._http.delete(`${baseUrl}/${id}`, this.options);
+    return this._http.delete(`${this.baseUrl}/${id}`, this.options);
   }
 
   getBlogInfo(id: any) {
     return this._http
-      .get(`${baseUrl}/blogs/${id}`, this.options)
+      .get(`${this.baseUrl}/blogs/${id}`, this.options)
       .pipe(retry(2), catchError(this.handleError));
   }
 }

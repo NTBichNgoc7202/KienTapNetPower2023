@@ -99,6 +99,7 @@ const store = new MongoDBStore({
   uri: databaseUrl,
   databaseName: "GlowyBeauty",
   collection: "mySessions",
+  expires: oneDay,
   // By default, sessions expire after 2 weeks. The `expires` option lets
   // you overwrite that by setting the expiration in milliseconds
   // expires: 1000 * 60 * 60 * 24 * 1, // 1 days in milliseconds,
@@ -125,6 +126,8 @@ app.use(
       secure: true, // true if only use cookie over https
       sameSite: "none",
       path: "/",
+      // Enable domain and everything will fuck up
+      // domain:'glowy.web.app'
     },
     store: store,
     // rolling: true,
@@ -189,11 +192,26 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   //   var port = server.address().port;
   //   console.info(`listening on port ${port} at https://${host}:${port}`);
   // });
-  console.log(process.env.NODE_ENV);
   https.createServer(certificate, app).listen(port, function () {
     console.log("localhost started on", port, `at https://localhost:${port}`);
   });
 }
+
+// const cors = require("cors");
+// app.use(
+//   cors({
+//     origin: [
+//       "https://glowy.web.app",
+//       "http://localhost:3000",
+//       "https://localhost:4300",
+//       "http://localhost:4300",
+//     ],
+//     credentials: true,
+//     preflightContinue: true,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//     allowedHeaders: "*",
+//   })
+// );
 
 const functions = require("firebase-functions");
 exports.app = functions.https.onRequest(app);

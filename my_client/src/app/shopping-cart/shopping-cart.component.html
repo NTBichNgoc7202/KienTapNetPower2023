@@ -6,7 +6,7 @@
         <div class="breadcrumb__text">
           <h4>Giỏ hàng</h4>
           <div class="breadcrumb__links">
-            <a href="">Trang chủ</a>
+            <a routerLink="/home-page">Trang chủ</a>
             <a href="">Sản phẩm</a>
             <span>Giỏ hàng</span>
           </div>
@@ -37,7 +37,10 @@
               <tbody>
                 <tr *ngFor="let p of cart; index as i">
                   <td>{{ i + 1 }}</td>
-                  <td class="product__cart__item container-flex" (click)="onSelect(p._id)">
+                  <td
+                    class="product__cart__item container-flex"
+                    (click)="onSelect(p._id)"
+                  >
                     <div class="product__cart__item__pic">
                       <img style="width: 100px" src="{{ p.image }}" alt="" />
                     </div>
@@ -47,27 +50,38 @@
                       </h6>
                       <h6>
                         {{
-                        p.price | currency : "VND" : "symbol-narrow" : "6.0-3"
+                          p.price | currency : "VND" : "symbol-narrow" : "6.0-3"
                         }}
                       </h6>
                     </div>
                   </td>
                   <td class="quantity__item">
                     <div class="quantity">
-                      <button type="button" class="btn adjust-btn" (click)="decrease(p)">
+                      <button
+                        type="button"
+                        class="btn adjust-btn"
+                        (click)="decrease(p)"
+                      >
                         <i class="fa-solid fa-minus" style="color: #512e1f"></i>
                       </button>
                       <span>{{ p.quantity }}</span>
-                      <button type="button" class="btn adjust-btn" (click)="increase(p)">
+                      <button
+                        type="button"
+                        class="btn adjust-btn"
+                        (click)="increase(p)"
+                      >
                         <i class="fa-solid fa-plus" style="color: #512e1f"></i>
                       </button>
                     </div>
                   </td>
                   <td>
-                    <span [innerText]="
+                    <span
+                      [innerText]="
                         p.quantity * p.price
                           | currency : 'VND' : 'symbol-narrow' : '6.0-3'
-                      " #singleprice></span>
+                      "
+                      #singleprice
+                    ></span>
                   </td>
                   <td>
                     <button (click)="delete(p._id)" class="btn btn-danger">
@@ -79,21 +93,26 @@
             </table>
           </div>
           <div class="row card">
-            <strong>TỔNG ĐƠN HÀNG:
+            <strong
+              >TỔNG ĐƠN HÀNG:
               {{
-              grandTotal | currency : "VND" : "symbol-narrow" : "6.0-3"
-              }}</strong>
+                grandTotal | currency : "VND" : "symbol-narrow" : "6.0-3"
+              }}</strong
+            >
           </div>
           <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="continue__btn">
-                <a href="#" routerLink="/home-page" routerLinkActive="active"><i class="fa-solid fa-arrow-left"></i>
-                  Tiếp tục mua sắm</a>
+                <a href="#" routerLink="/home-page" routerLinkActive="active"
+                  ><i class="fa-solid fa-arrow-left"></i> Tiếp tục mua sắm</a
+                >
               </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
               <div class="continue__btn remove__btn">
-                <a (click)="emptyCart()"><i class="fa-solid fa-x"></i> Xóa toàn bộ</a>
+                <a (click)="emptyCart()"
+                  ><i class="fa-solid fa-x"></i> Xóa toàn bộ</a
+                >
               </div>
             </div>
           </div>
@@ -101,80 +120,136 @@
         <div class="col-lg-4" style="padding: 0px; height: 100%">
           <div class="card cart__total">
             <h6><strong>Thông tin giao hàng</strong></h6>
-            <form [formGroup]="purchaseForm" #orderForm="ngForm" (ngSubmit)="submitData(orderForm.value)">
+            <form
+              [formGroup]="purchaseForm"
+              #orderForm="ngForm"
+              (ngSubmit)="submitData(orderForm.value)"
+            >
               <div class="form-group checkout__input">
                 <p>Họ tên<span>*</span></p>
-                <input type="text" placeholder="Nhập họ và tên" [required]="true" id="username" class="form-control"
-                  formControlName="username" name="username"
-                  [class.is-invalid]="username.invalid && username.touched" />
+                <input
+                  type="text"
+                  placeholder="Nhập họ và tên"
+                  [required]="true"
+                  id="username"
+                  class="form-control"
+                  formControlName="username"
+                  name="username"
+                  [class.is-invalid]="username.invalid && username.touched"
+                />
               </div>
               <div *ngIf="username.invalid && username.touched" class="my-2">
-                <small *ngIf="username.errors?.['required']" class="text-danger">Họ và tên không được để trống!</small>
-                <small *ngIf="username.errors?.['minlength']" class="text-danger">Họ và tên bắt buộc trên 2 ký
-                  tự!</small>
-                <small *ngIf="username.errors?.['nameNotMatch']" class="text-danger">Họ và tên không được chứa ký tự đặc
-                  biệt</small>
+                <small *ngIf="username.errors?.['required']" class="text-danger"
+                  >Họ và tên không được để trống!</small
+                >
+                <small
+                  *ngIf="username.errors?.['minlength']"
+                  class="text-danger"
+                  >Họ và tên bắt buộc trên 2 ký tự!</small
+                >
+                <small
+                  *ngIf="username.errors?.['nameNotMatch']"
+                  class="text-danger"
+                  >Họ và tên không được chứa ký tự đặc biệt</small
+                >
               </div>
               <div class="form-group">
                 <div class="checkout__input">
                   <p>Số điện thoại<span>*</span></p>
-                  <input placeholder="Nhập số điện thoại" type="text" [required]="true" id="phone" class="form-control"
-                    formControlName="phone" name="phone" [class.is-invalid]="phone.invalid && phone.touched" />
+                  <input
+                    placeholder="Nhập số điện thoại"
+                    type="text"
+                    [required]="true"
+                    id="phone"
+                    class="form-control"
+                    formControlName="phone"
+                    name="phone"
+                    [class.is-invalid]="phone.invalid && phone.touched"
+                  />
                 </div>
                 <div *ngIf="phone.invalid && phone.touched" class="my-2">
-                  <small *ngIf="phone.errors?.['required']" class="text-danger">Số điện thoại không được để
-                    trống!</small>
-                  <small *ngIf="phone.errors?.['minlength']" class="text-danger">Số điện thoại bắt buộc 10 chữ
-                    số!</small>
-                  <small *ngIf="phone.errors?.['maxlength']" class="text-danger">Số điện thoại bắt buộc 10 chữ
-                    số!</small>
+                  <small *ngIf="phone.errors?.['required']" class="text-danger"
+                    >Số điện thoại không được để trống!</small
+                  >
+                  <small *ngIf="phone.errors?.['minlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
+                  <small *ngIf="phone.errors?.['maxlength']" class="text-danger"
+                    >Số điện thoại bắt buộc 10 chữ số!</small
+                  >
                   <small *ngIf="phone.errors?.['pattern']" class="text-danger">
-                    Số điện thoại không hợp lệ!</small>
+                    Số điện thoại không hợp lệ!</small
+                  >
                 </div>
               </div>
               <div class="form-group checkout__input">
                 <p>Địa chỉ<span>*</span></p>
-                <input type="text" placeholder="Nhập địa chỉ" [required]="true" id="address" class="form-control"
-                  formControlName="address" name="address" [class.is-invalid]="address.invalid && address.touched" />
+                <input
+                  type="text"
+                  placeholder="Nhập địa chỉ"
+                  [required]="true"
+                  id="address"
+                  class="form-control"
+                  formControlName="address"
+                  name="address"
+                  [class.is-invalid]="address.invalid && address.touched"
+                />
               </div>
               <div *ngIf="address.invalid && address.touched" class="my-2">
-                <small *ngIf="address.errors?.['required']" class="text-danger">Địa chỉ không được để trống!</small>
-                <small *ngIf="address.errors?.['minlength']" class="text-danger">Địa chỉ phải trên 10 ký tự!</small>
+                <small *ngIf="address.errors?.['required']" class="text-danger"
+                  >Địa chỉ không được để trống!</small
+                >
+                <small *ngIf="address.errors?.['minlength']" class="text-danger"
+                  >Địa chỉ phải trên 10 ký tự!</small
+                >
               </div>
               <div>
                 <p>
-                  <strong>Chọn phương thức thanh toán<span style="color: red">*</span></strong>
+                  <strong
+                    >Chọn phương thức thanh toán<span style="color: red"
+                      >*</span
+                    ></strong
+                  >
                 </p>
                 <div class="grid" style="--bs-columns: 4; --bs-gap: 5rem">
                   <div class="g-col-2">
                     <div class="form-check">
-                      <input type="radio"
+                      <input
+                        type="radio"
                         checked
                         name="paymentMethod"
                         id="paymentMethod"
                         class="form-check-input"
                         formControlName="paymentMethod"
                         value="transfer"
-                        />
+                      />
                       <label class="form-check-label" for="paymentMethod">
                         Chuyển khoản
                       </label>
                     </div>
-                    <img class="me-2" width="45px"
+                    <img
+                      class="me-2"
+                      width="45px"
                       src="https://images.careerbuilder.vn/employer_folders/lot9/221789/103316momopink-logo.png"
-                      alt="Visa" />
-                    <img class="me-2" width="45px"
+                      alt="Visa"
+                    />
+                    <img
+                      class="me-2"
+                      width="45px"
                       src="https://png.pngtree.com/png-vector/20200718/ourlarge/pngtree-atm-card-banking-flat-icon-png-image_2307566.jpg"
-                      alt="Mastercard" />
+                      alt="Mastercard"
+                    />
                   </div>
                   <div class="g-col-2" style="margin-top: 10px">
                     <div class="form-check">
-                      <input type="radio"
-                      name="paymentMethod"
-                      id="paymentMethod"
-                      class="form-check-input"
-                      formControlName="paymentMethod"
-                      value="cod"/>
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        id="paymentMethod"
+                        class="form-check-input"
+                        formControlName="paymentMethod"
+                        value="cod"
+                      />
                       <label class="form-check-label" for="paymentMethod">
                         COD (Thanh toán khi nhận hàng)
                       </label>
@@ -184,13 +259,16 @@
               </div>
             </form>
 
-            <button (click)="onPurchase(orderForm.value)"
-
-            class="primary-btn"
-              style="margin-top: 10px">
+            <button
+              (click)="onPurchase(orderForm.value)"
+              class="primary-btn"
+              style="margin-top: 10px"
+            >
               ĐẶT HÀNG
             </button>
-            <h6 class="notice" [hidden]="purchaseForm.valid">Vui lòng điền đầy đủ các trường thông tin trên</h6>
+            <h6 class="notice" [hidden]="purchaseForm.valid">
+              Vui lòng điền đầy đủ các trường thông tin trên
+            </h6>
           </div>
         </div>
       </div>
@@ -200,11 +278,20 @@
   <ng-container *ngIf="cart?.length == 0">
     <div class="container">
       <div class="text-center card mx-auto d-block">
-        <img style="width: 250px; color: #EE2D7A" src="https://icon-library.com/images/add-to-cart-icon/add-to-cart-icon-23.jpg"
-          alt="" />
+        <img
+          style="width: 250px; color: #ee2d7a"
+          src="https://icon-library.com/images/add-to-cart-icon/add-to-cart-icon-23.jpg"
+          alt=""
+        />
         <h5><strong>Giỏ hàng của bạn đang trống</strong></h5>
         <p>Hãy thêm sản phẩm vào giỏ hàng</p>
-        <button class="continue__btn buying__btn" style="background: #EE2D7A; border: 1px solid #EE2D7A;" routerLink="/home-page" routerLinkActive="active" class="primary-btn">
+        <button
+          class="continue__btn buying__btn"
+          style="background: #ee2d7a; border: 1px solid #ee2d7a"
+          routerLink="/home-page"
+          routerLinkActive="active"
+          class="primary-btn"
+        >
           Mua sắm ngay
         </button>
       </div>

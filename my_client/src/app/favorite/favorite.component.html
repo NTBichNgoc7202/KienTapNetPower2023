@@ -6,7 +6,7 @@
         <div class="breadcrumb__text">
           <h4>Giỏ hàng</h4>
           <div class="breadcrumb__links">
-            <a href="">Trang chủ</a>
+            <a routerLink="/home-page">Trang chủ</a>
             <a href="">Sản phẩm</a>
             <span>Wish list</span>
           </div>
@@ -29,7 +29,7 @@
                 <tr>
                   <th>STT</th>
                   <th>Sản phẩm</th>
-                  <th style="text-align: center;">Xóa</th>
+                  <th style="text-align: center">Xóa</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,11 +43,15 @@
                       <h6>
                         <strong>{{ p.name }}</strong>
                       </h6>
-                      <h6>{{ p.price | currency:'VND':'symbol-narrow':'6.0-3'}}</h6>
+                      <h6>
+                        {{
+                          p.price | currency : "VND" : "symbol-narrow" : "6.0-3"
+                        }}
+                      </h6>
                     </div>
                   </td>
 
-                  <td style="text-align: center;">
+                  <td style="text-align: center">
                     <button (click)="delete(p._id)" class="btn btn-danger">
                       <i class="fas fa-trash-alt"></i>
                     </button>
@@ -74,7 +78,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </ng-container>
@@ -82,14 +85,15 @@
   <ng-container *ngIf="favorite?.length == 0">
     <div class="container">
       <div class="text-center card mx-auto d-block">
-        <i class="bi bi-search-heart fa-10x" ></i>
+        <i class="bi bi-search-heart fa-10x"></i>
         <h5><strong>Danh mục yêu thích của bạn đang trống</strong></h5>
         <p>Hãy thêm sản phẩm yêu thích vào đây</p>
         <button
           class="continue__btn"
           routerLink="/home-page"
           routerLinkActive="active"
-          class="primary-btn" style="background: #ee2d7a; border: 1px solid #ee2d7a;"
+          class="primary-btn"
+          style="background: #ee2d7a; border: 1px solid #ee2d7a"
         >
           Mua sắm ngay
         </button>

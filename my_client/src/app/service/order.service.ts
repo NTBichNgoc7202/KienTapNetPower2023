@@ -13,29 +13,39 @@ import {
   throwError,
   BehaviorSubject,
 } from 'rxjs';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
   getAllOrders(): Observable<any> {
     return this._http
-      .get<any>(`${baseUrl}/orders`, this.options)
+      .get<any>(`${this.baseUrl}/orders`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getOrderById(unique_id: any): Observable<any> {
     return this._http
-      .get<any>(`${baseUrl}/orders/${unique_id}`, this.options)
+      .get<any>(`${this.baseUrl}/orders/${unique_id}`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   postOrder(order: any): Observable<any> {
     return this._http
-      .post<any>(`${baseUrl}/orders`, order, this.options)
+      .post<any>(`${this.baseUrl}/orders`, order, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   handleError(err: HttpErrorResponse) {
@@ -54,7 +64,7 @@ export class OrderService {
     let tempRequestOptions: any = requestOptions;
     tempRequestOptions['body'] = { _id: id };
     return this._http
-      .delete(`${baseUrl}/orders/`, tempRequestOptions)
+      .delete(`${this.baseUrl}/orders/`, tempRequestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 }

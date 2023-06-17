@@ -13,7 +13,7 @@ import {
   throwError,
 } from 'rxjs';
 import { IAdmin } from '../interface/admin';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,26 +22,36 @@ export class AdminService {
   public isAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
   getAdmin(): Observable<IAdmin[]> {
     return this._http
-      .get<IAdmin[]>(`${baseUrl}/admin`, this.options)
+      .get<IAdmin[]>(`${this.baseUrl}/admin`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   logAdmin(data: Admin) {
-    return this._http.post(`${baseUrl}/login-admin`, data, this.options);
+    return this._http.post(`${this.baseUrl}/login-admin`, data, this.options);
   }
   signOutAdmin(): Observable<any> {
     return this._http
-      .post(`${baseUrl}/signout-admin`, {}, this.options)
+      .post(`${this.baseUrl}/signout-admin`, {}, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   checkIsAdmin() {
     return this._http
-      .get(`${baseUrl}/check-admin`, {
+      .get(`${this.baseUrl}/check-admin`, {
         responseType: 'text',
         withCredentials: true,
         observe: 'response',

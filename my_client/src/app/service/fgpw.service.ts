@@ -6,18 +6,28 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError, Observable, retry, throwError } from 'rxjs';
 import { Fgpw } from '../models/fgpw';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 @Injectable({
   providedIn: 'root',
 })
 export class FgpwService {
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
   resetPassword(data: Fgpw) {
     return this._http
-      .post(`${baseUrl}/users/Fgpw`, data, this.options)
+      .post(`${this.baseUrl}/users/Fgpw`, data, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   changePassword(
@@ -40,7 +50,7 @@ export class FgpwService {
       newPass: newPass,
     };
     return this._http
-      .put(`${baseUrl}/users/Fgpw`, data, requestOptions)
+      .put(`${this.baseUrl}/users/Fgpw`, data, requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
   handleError(err: HttpErrorResponse) {

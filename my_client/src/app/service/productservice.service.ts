@@ -8,20 +8,30 @@ import { catchError, Observable, retry, throwError, map } from 'rxjs';
 import { IProduct } from '../interface/productList';
 import { Product } from '../models/products';
 import { ICategory } from '../interface/category';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 @Injectable({
   providedIn: 'root',
 })
 export class ProductserviceService {
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
-  url_category = `${baseUrl}/products/category/`;
+  url_category = `${this.baseUrl}/products/category/`;
 
   getProductList(): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${baseUrl}/products`, this.options)
+      .get<IProduct[]>(`${this.baseUrl}/products`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getProductListByCategory(id: any): Observable<IProduct[]> {
@@ -31,7 +41,7 @@ export class ProductserviceService {
   }
   getProductListByTag(tag: any): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${baseUrl}/products/tag/${tag}`, this.options)
+      .get<IProduct[]>(`${this.baseUrl}/products/tag/${tag}`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -46,7 +56,7 @@ export class ProductserviceService {
       withCredentials: true,
     };
     return this._http
-      .post(`${baseUrl}/products`, JSON.stringify(p), requestOptions)
+      .post(`${this.baseUrl}/products`, JSON.stringify(p), requestOptions)
       .pipe(
         map((res) => res as any),
         retry(3),
@@ -65,7 +75,7 @@ export class ProductserviceService {
       withCredentials: true,
     };
     return this._http
-      .put(`${baseUrl}/products/`, JSON.stringify(p), requestOptions)
+      .put(`${this.baseUrl}/products/`, JSON.stringify(p), requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -82,19 +92,19 @@ export class ProductserviceService {
     let tempRequestOptions: any = requestOptions;
     tempRequestOptions['body'] = { _id: id };
     return this._http
-      .delete(`${baseUrl}/products/`, tempRequestOptions)
+      .delete(`${this.baseUrl}/products/`, tempRequestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
   getCategoryList(): Observable<ICategory[]> {
     return this._http
-      .get<ICategory[]>(`${baseUrl}/products/categories`, this.options)
+      .get<ICategory[]>(`${this.baseUrl}/products/categories`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
 
   getProductInfo(id: any): Observable<any> {
     return this._http
-      .get<Product>(`${baseUrl}/products/${id}`, this.options)
+      .get<Product>(`${this.baseUrl}/products/${id}`, this.options)
       .pipe(
         map((res) => {
           return res as Product;

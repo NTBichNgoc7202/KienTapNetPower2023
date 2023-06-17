@@ -8,28 +8,40 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, retry, throwError } from 'rxjs';
 import { IUser } from '../interface/users';
 import { User } from '../models/users';
-import { baseUrl, proxyCase } from './server-url';
+import { Connect } from './connect.service';
 @Injectable({
   providedIn: 'root',
 })
 export class UserserviceService {
-  constructor(private _http: HttpClient) {}
+  public baseUrl: string = '';
+  constructor(private _http: HttpClient, private _connect: Connect) {
+    this._connect.url.subscribe({
+      next: (res) => {
+        this.baseUrl = res;
+      },
+      error: (err) => {
+        console.log(err.message);
+      },
+    });
+  }
   options = {
     withCredentials: true,
   };
   getUsers(): Observable<IUser[]> {
     return this._http
-      .get<IUser[]>(`${baseUrl}/users`, this.options)
+      .get<IUser[]>(`${this.baseUrl}/users`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getUserInfo(id: any): Observable<any> {
-    return this._http.get<User>(`${baseUrl}/users/${id}`, this.options).pipe(
-      map((res) => {
-        return res as User;
-      }),
-      retry(2),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get<User>(`${this.baseUrl}/users/${id}`, this.options)
+      .pipe(
+        map((res) => {
+          return res as User;
+        }),
+        retry(2),
+        catchError(this.handleError)
+      );
   }
 
   postUserInfo(c: any): Observable<any> {
@@ -43,7 +55,7 @@ export class UserserviceService {
       withCredentials: true,
     };
     return this._http
-      .post(`${baseUrl}/users`, JSON.stringify(c), requestOptions)
+      .post(`${this.baseUrl}/users`, JSON.stringify(c), requestOptions)
       .pipe(
         map((res) => res as any),
         retry(3),
@@ -52,7 +64,7 @@ export class UserserviceService {
   }
 
   postUser(data: User) {
-    return this._http.post(`${baseUrl}/users/regis`, data, this.options);
+    return this._http.post(`${this.baseUrl}/users/regis`, data, this.options);
   }
 
   updateUser(c: any): Observable<any> {
@@ -66,7 +78,7 @@ export class UserserviceService {
       withCredentials: true,
     };
     return this._http
-      .put(`${baseUrl}/users/`, JSON.stringify(c), requestOptions)
+      .put(`${this.baseUrl}/users/`, JSON.stringify(c), requestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -83,11 +95,11 @@ export class UserserviceService {
     let tempRequestOptions: any = requestOptions;
     tempRequestOptions['body'] = { _id: id };
     return this._http
-      .delete(`${baseUrl}/users/`, tempRequestOptions)
+      .delete(`${this.baseUrl}/users/`, tempRequestOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
   logUser(data?: User): Observable<any> {
-    return this._http.post(`${baseUrl}/users/login`, data, {
+    return this._http.post(`${this.baseUrl}/users/login`, data, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=utf-8',
       }),
@@ -101,7 +113,7 @@ export class UserserviceService {
       'application/json;charset=utf-8'
     );
     return this._http.post(
-      `${baseUrl}/users/logout`,
+      `${this.baseUrl}/users/logout`,
       {},
       {
         headers: headers,
@@ -111,34 +123,36 @@ export class UserserviceService {
     );
   }
   getLoginCookies() {
-    return this._http.get(`${baseUrl}/users/cookieLogin`, {
+    return this._http.get(`${this.baseUrl}/users/cookieLogin`, {
       responseType: 'json',
       withCredentials: true,
     });
   }
   checkIsLoggedIn(): Observable<any> {
-    return this._http.get(`${baseUrl}/users/isLoggedIn`, {
+    return this._http.get(`${this.baseUrl}/users/isLoggedIn`, {
       responseType: 'json',
       withCredentials: true,
     });
   }
   getUserByPhone(phone: any): Observable<User> {
-    return this._http.get(`${baseUrl}/users/phone/${phone}`, this.options).pipe(
-      map((res) => <User>res),
-      retry(2),
-      catchError(this.handleError)
-    );
+    return this._http
+      .get(`${this.baseUrl}/users/phone/${phone}`, this.options)
+      .pipe(
+        map((res) => <User>res),
+        retry(2),
+        catchError(this.handleError)
+      );
   }
   getLocation(phone: any): Observable<any> {
     const options = {
       params: new HttpParams().set('phone', phone),
       withCredentials: true,
     };
-    return this._http.get(`${baseUrl}/users/location`, options);
+    return this._http.get(`${this.baseUrl}/users/location`, options);
   }
   updateLocation(phone: any, locationData: any): Observable<any> {
     return this._http.put(
-      `${baseUrl}/users/location`,
+      `${this.baseUrl}/users/location`,
       {
         phone: phone,
         location: locationData,

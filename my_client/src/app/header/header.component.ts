@@ -19,9 +19,8 @@ export class HeaderComponent {
     private _productService: ProductserviceService,
     private _favoriteService: FavoriteService,
     private _userService: UserserviceService,
-    private router: Router
+    private router: Router,
   ) {
-    // debugger;
     this._shoppingCartService.totalItem.subscribe({
       next: (res) => {
         this.totalItem = res;
@@ -49,10 +48,10 @@ export class HeaderComponent {
   }
   goToCategory(id: any) {
     this.router.navigate(['products', id]);
-  };
+  }
   goToProduct() {
     this.router.navigate(['products']);
-  };
+  }
   goToAccount() {
     this._userService.checkIsLoggedIn().subscribe({
       next: (res) => {
@@ -60,16 +59,19 @@ export class HeaderComponent {
           this.router.navigate(['login']);
           return;
         }
-        this.router.navigate(['account',res.user.phone]);
+        this.router.navigate(['account', res.user.phone]);
       },
       error: (err) => {
         console.log(err.message);
         this.router.navigate(['login']);
       },
     });
-  };
+  }
   // <a routerLink="/favorite" routerLinkActive="active"></a>
-  gotoFavorite() {
+  goToFavorite() {
     this.router.navigate(['love']);
+  }
+  goToDashboard() {
+    window.location.href = 'https://glowy-dashboard.web.app/dashboard';
   }
 }
