@@ -27,7 +27,6 @@ export class ProductserviceService {
   options = {
     withCredentials: true,
   };
-  url_category = `${this.baseUrl}/products/category/`;
 
   getProductList(): Observable<IProduct[]> {
     return this._http
@@ -36,7 +35,7 @@ export class ProductserviceService {
   }
   getProductListByCategory(id: any): Observable<IProduct[]> {
     return this._http
-      .get<IProduct[]>(`${this.url_category}${id}`, this.options)
+      .get<IProduct[]>(`${this.baseUrl}/products/category/${id}`, this.options)
       .pipe(retry(3), catchError(this.handleError));
   }
   getProductListByTag(tag: any): Observable<IProduct[]> {
