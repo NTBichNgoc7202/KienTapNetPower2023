@@ -8,8 +8,8 @@
         </a>
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li>
-            <a (click)="onDashboard()" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-              <i class="fs-4 bi-speedometer2"></i>
+            <a (click)="goToDashboard()" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+              <i class="fs-4 bi bi-graph-up"></i>
               <span class="ms-1 d-none d-sm-inline">Dashboard</span>
             </a>
           </li>
@@ -41,15 +41,14 @@
         <div class="dropdown pb-4">
           <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://lh3.googleusercontent.com/a-/AD_cMMTO5FeGRjov13aJ-eFah25jGm4lEfwfo6lzVM6MYhQ=s800-p" alt="hugenerd" width="30" height="30" class="rounded-circle" />
-            Click to show more
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <!-- <img src="https://lh3.googleusercontent.com/a-/AD_cMMTO5FeGRjov13aJ-eFah25jGm4lEfwfo6lzVM6MYhQ=s800-p" alt="hugenerd" width="30" height="30" class="rounded-circle" /> -->
             <button class="dropdown-item" (click)="onSignOut()">Sign out</button>
-            <button class="dropdown-item">Action</button>
-            <button class="dropdown-item">Another action</button>
-            <button class="dropdown-item">Something else here</button>
-          </div>
+
+          </a>
+          <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <button class="dropdown-item" (click)="onSignOut()">Sign out</button>
+
+          </div> -->
         </div>
       </div>
     </div>
