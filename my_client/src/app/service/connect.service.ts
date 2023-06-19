@@ -17,7 +17,7 @@ export class Connect {
         params: new HttpParams().set('title', 'https://glowy.web.app'),
       });
     } else {
-      return new BehaviorSubject<any>({ link: 'http://localhost:3000' });
+      return new BehaviorSubject<any>({ link: 'https://localhost:3000' });
       // After this code is for testing, if you want to test then uncomment it. Use with caution
       // return this._http.get('http://localhost:3100/glowy', {
       //   params: new HttpParams().set('title', 'https://localhost:4300'),
