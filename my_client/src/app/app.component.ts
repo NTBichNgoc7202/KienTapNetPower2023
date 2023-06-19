@@ -34,8 +34,11 @@ export class AppComponent {
   onProduct() {
     this.router.navigate(['admin']);
   }
-  onDashboard() {
-    this.router.navigate(['admin-dashboard']);
+  // onDashboard() {
+  //   this.router.navigate(['admin-dashboard']);
+  // }
+  goToDashboard() {
+    window.location.href = 'https://glowy-dashboard.web.app/dashboard';
   }
   onFeedback() {
     this.router.navigate(['admin-feedback']);

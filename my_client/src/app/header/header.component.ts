@@ -71,7 +71,7 @@ export class HeaderComponent {
   goToFavorite() {
     this.router.navigate(['love']);
   }
-  goToDashboard() {
-    window.location.href = 'https://glowy-dashboard.web.app/dashboard';
-  }
+  // goToDashboard() {
+  //   window.location.href = 'https://glowy-dashboard.web.app/dashboard';
+  // }
 }
